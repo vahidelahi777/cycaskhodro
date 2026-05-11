@@ -1,0 +1,421 @@
+=========================================
+ NEXT.JS PROJECT FULL AUDIT 
+=========================================
+
+1️⃣ NODE / NPM
+-----------------------------------------
+v23.1.0
+11.14.1
+
+2️⃣ PACKAGE.JSON
+-----------------------------------------
+{
+  "name": "cycaskhodro",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_OPTIONS='--no-experimental-require-module' next dev",
+    "build": "NODE_OPTIONS='--no-experimental-require-module' next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "@radix-ui/react-accordion": "^1.2.2",
+    "@radix-ui/react-dialog": "^1.1.4",
+    "@radix-ui/react-dropdown-menu": "^2.1.4",
+    "@radix-ui/react-navigation-menu": "^1.2.3",
+    "@radix-ui/react-scroll-area": "^1.2.2",
+    "@radix-ui/react-select": "^2.1.4",
+    "@radix-ui/react-separator": "^1.1.1",
+    "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-tabs": "^1.1.2",
+    "@radix-ui/react-toast": "^1.2.4",
+    "@tanstack/react-query": "^5.66.1",
+    "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.2.0",
+    "axios": "^1.7.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-react": "^8.5.2",
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.474.0",
+    "mapbox-gl": "^3.10.0",
+    "next": "^15.5.18",
+    "next-intl": "^3.26.3",
+    "next-themes": "^0.4.4",
+    "react": "^19.2.6",
+    "react-countup": "^6.5.3",
+    "react-dom": "^19.2.6",
+    "react-hook-form": "^7.54.2",
+    "react-intersection-observer": "^9.14.1",
+    "react-map-gl": "^7.1.7",
+    "react-player": "^2.16.0",
+    "sharp": "^0.33.5",
+    "sonner": "^1.7.4",
+    "swiper": "^11.2.1",
+    "tailwind-merge": "^2.6.0",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/mapbox-gl": "^3.4.1",
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@typescript-eslint/parser": "^8.24.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.20",
+    "eslint-plugin-tailwindcss": "^3.18.0",
+    "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
+
+3️⃣ NEXT VERSION
+-----------------------------------------
+    "next": "^15.5.18",
+
+4️⃣ TYPESCRIPT
+-----------------------------------------
+tsconfig.json exists
+
+5️⃣ PROJECT STRUCTURE
+-----------------------------------------
+src
+├── app
+│   ├── [locale]
+│   │   ├── about
+│   │   │   └── page.tsx
+│   │   ├── agencies
+│   │   │   └── page.tsx
+│   │   ├── blog
+│   │   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   ├── contact
+│   │   │   └── page.tsx
+│   │   ├── faq
+│   │   │   └── page.tsx
+│   │   ├── layout-meta.ts
+│   │   ├── layout.tsx
+│   │   ├── models
+│   │   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   └── services
+│   │       ├── [slug]
+│   │       └── page.tsx
+│   ├── actions
+│   │   └── contact.ts
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── premium
+│       └── page.tsx
+├── components
+│   ├── Discover
+│   │   └── DiscoverSlider.tsx
+│   ├── ModelsShowcase
+│   │   ├── ModelsShowcase.tsx
+│   │   └── ModelsShowcaseClient.tsx
+│   ├── RepairShop
+│   │   └── RepairShopSlider.tsx
+│   ├── TrainingCenter
+│   │   └── TrainingCenterSlider.tsx
+│   ├── home
+│   │   ├── Contact.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Products.tsx
+│   │   ├── Services.tsx
+│   │   └── WhyUs.tsx
+│   ├── home-demo
+│   │   ├── AfterSalesTeaser.tsx
+│   │   ├── FAQ.tsx
+│   │   ├── FeaturedModels.tsx
+│   │   ├── FinalCTA.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Steps.tsx
+│   │   ├── Topbar.tsx
+│   │   └── TrustCards.tsx
+│   ├── landing
+│   │   └── PremiumLanding.tsx
+│   ├── layout
+│   │   ├── Footer.tsx
+│   │   └── Header.tsx
+│   ├── premium
+│   │   ├── AppleHero.tsx
+│   │   ├── ApplePremiumHeader.tsx
+│   │   ├── BenefitsSection.tsx
+│   │   ├── DiscoverSection.tsx
+│   │   ├── FAQSection.tsx
+│   │   ├── HeroCarousel.tsx
+│   │   ├── LatestNews.tsx
+│   │   ├── PremiumContact.tsx
+│   │   ├── PremiumFooter.tsx
+│   │   ├── PremiumProducts.tsx
+│   │   ├── PremiumServices.tsx
+│   │   ├── PremiumServices.tsx.backup
+│   │   ├── PremiumServicesGrid.tsx
+│   │   └── PremiumWhyUs.tsx
+│   ├── sections
+│   │   ├── AgencyMapSection.tsx
+│   │   ├── ContactSection.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── ModelsSection.tsx
+│   │   ├── NewsSection.tsx
+│   │   ├── ServicesSection.tsx
+│   │   └── WhyUsSection.tsx
+│   └── ui
+│       ├── Button.tsx
+│       ├── OptimizedImage.tsx
+│       └── Tabs.tsx
+├── content
+│   ├── benefits.ts
+│   ├── discover.ts
+│   ├── home.ts
+│   ├── models.ts
+│   ├── pages.ts
+│   └── premium.ts
+├── i18n
+│   ├── request.ts
+│   └── routing.ts
+├── lib
+│   ├── data.ts
+│   └── utils.ts
+├── store
+│   ├── configurator.store.ts
+│   └── ui.store.ts
+├── styles
+│   └── globals.css
+└── types
+    └── index.ts
+
+33 directories, 77 files
+
+6️⃣ APP ROUTER STRUCTURE
+-----------------------------------------
+src/app
+├── [locale]
+│   ├── about
+│   │   └── page.tsx
+│   ├── agencies
+│   │   └── page.tsx
+│   ├── blog
+│   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── contact
+│   │   └── page.tsx
+│   ├── faq
+│   │   └── page.tsx
+│   ├── layout-meta.ts
+│   ├── layout.tsx
+│   ├── models
+│   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── page.tsx
+│   └── services
+│       ├── [slug]
+│       │   └── page.tsx
+│       └── page.tsx
+├── actions
+│   └── contact.ts
+├── layout.tsx
+├── page.tsx
+└── premium
+    └── page.tsx
+
+14 directories, 17 files
+
+7️⃣ CHECK ROOT LAYOUT
+-----------------------------------------
+✅ root layout exists
+export default function RootLayout({
+
+8️⃣ CHECK LOCALE LAYOUT
+-----------------------------------------
+✅ locale layout exists
+export default async function LocaleLayout({
+
+9️⃣ CHECK PAGES
+-----------------------------------------
+src/app/[locale]/contact/page.tsx
+src/app/[locale]/faq/page.tsx
+src/app/[locale]/about/page.tsx
+src/app/[locale]/models/page.tsx
+src/app/[locale]/models/[slug]/page.tsx
+src/app/[locale]/blog/page.tsx
+src/app/[locale]/blog/[slug]/page.tsx
+src/app/[locale]/agencies/page.tsx
+src/app/[locale]/page.tsx
+src/app/[locale]/services/page.tsx
+src/app/[locale]/services/[slug]/page.tsx
+src/app/page.tsx
+src/app/premium/page.tsx
+
+🔟 CHECK DYNAMIC ROUTES
+-----------------------------------------
+src/app/[locale]
+src/app/[locale]/models/[slug]
+src/app/[locale]/blog/[slug]
+src/app/[locale]/services/[slug]
+
+1️⃣1️⃣ CHECK NEXT-INTL
+-----------------------------------------
+✅ src/i18n exists
+request.ts
+routing.ts
+
+1️⃣2️⃣ CHECK MIDDLEWARE
+-----------------------------------------
+✅ middleware.ts exists
+
+1️⃣3️⃣ CHECK MESSAGES
+-----------------------------------------
+✅ messages folder exists
+en.json
+fa.json
+
+1️⃣4️⃣ CHECK NEXT CONFIG
+-----------------------------------------
+✅ next.config.mjs exists
+
+1️⃣5️⃣ CHECK FOR DUPLICATE LOCALES
+-----------------------------------------
+
+1️⃣6️⃣ TYPESCRIPT CHECK
+-----------------------------------------
+
+1️⃣7️⃣ NEXT BUILD TEST
+-----------------------------------------
+   ▲ Next.js 15.5.18
+   - Environments: .env.local, .env
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 4.3s
+   Linting and checking validity of types ...
+
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+   The following mandatory changes were made to your tsconfig.json:
+
+   	- jsx was set to preserve (next.js implements its own optimized jsx transform)
+
+
+./src/components/home/Contact.tsx
+3:25  Warning: 'Mail' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/home/Footer.tsx
+3:8  Warning: 'Link' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/home/Header.tsx
+6:26  Warning: 'MapPin' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/home-demo/Header.tsx
+6:23  Warning: 'contact' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+14:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/home-demo/Hero.tsx
+49:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/landing/PremiumLanding.tsx
+14:9  Warning: 'isRTL' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+49:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+138:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+262:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+548:26  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/layout/Footer.tsx
+5:25  Warning: 'Clock' is defined but never used.  @typescript-eslint/no-unused-vars
+40:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+46:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/layout/Header.tsx
+7:26  Warning: 'ChevronDown' is defined but never used.  @typescript-eslint/no-unused-vars
+92:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+117:32  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/premium/PremiumContact.tsx
+29:14  Warning: 'error' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/premium/PremiumFooter.tsx
+3:31  Warning: 'Instagram' is defined but never used.  @typescript-eslint/no-unused-vars
+3:42  Warning: 'Send' is defined but never used.  @typescript-eslint/no-unused-vars
+3:48  Warning: 'Linkedin' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/sections/HeroSection.tsx
+38:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/sections/ModelsSection.tsx
+7:15  Warning: 'Gauge' is defined but never used.  @typescript-eslint/no-unused-vars
+7:22  Warning: 'ArrowLeft' is defined but never used.  @typescript-eslint/no-unused-vars
+7:33  Warning: 'ArrowRight' is defined but never used.  @typescript-eslint/no-unused-vars
+22:9  Warning: 'isRTL' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+68:39  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/sections/NewsSection.tsx
+105:10  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/ui/OptimizedImage.tsx
+33:9  Warning: 'isExternal' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/5) ...
+   Generating static pages (1/5) 
+   Generating static pages (2/5) 
+   Generating static pages (3/5) 
+ ✓ Generating static pages (5/5)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                      155 B         103 kB
+├ ○ /_not-found                            995 B         103 kB
+├ ƒ /[locale]                              155 B         103 kB
+├ ƒ /[locale]/about                        155 B         103 kB
+├ ƒ /[locale]/agencies                     155 B         103 kB
+├ ƒ /[locale]/blog                         155 B         103 kB
+├ ƒ /[locale]/blog/[slug]                  155 B         103 kB
+├ ƒ /[locale]/contact                      155 B         103 kB
+├ ƒ /[locale]/faq                          155 B         103 kB
+├ ƒ /[locale]/models                       155 B         103 kB
+├ ƒ /[locale]/models/[slug]                155 B         103 kB
+├ ƒ /[locale]/services                     155 B         103 kB
+├ ƒ /[locale]/services/[slug]              155 B         103 kB
+└ ○ /premium                             58.9 kB         161 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-c53a5bd458aa8842.js       46.3 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+=========================================
+ AUDIT FINISHED 
+=========================================
