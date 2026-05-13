@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { OpelModel } from '@/content/models'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
+import { OptimizedImage } from '@/shared/ui/OptimizedImage'
 
 interface ModelsShowcaseClientProps {
   models: OpelModel[]

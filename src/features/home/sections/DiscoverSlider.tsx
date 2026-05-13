@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
+import { OptimizedImage } from '@/shared/ui/OptimizedImage'
 
 const slides = [
   {

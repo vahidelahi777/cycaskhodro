@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { OptimizedImage } from '@/components/ui/OptimizedImage'
+import { OptimizedImage } from '@/shared/ui/OptimizedImage'
 
 interface NewsItem {
   id: number

@@ -1,0 +1,227 @@
+PROJECT STRUCTURE
+
+├── .DS_Store
+├── .dockerignore
+├── .env
+├── .env.example
+├── .env.local
+├── .eslintrc.json
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── Dockerfile
+├── README.md
+├── _archived_backup
+│   └── premium
+│       └── page.tsx.bak
+├── _legacy_archive
+│   ├── home-demo_20260513_230425
+│   │   ├── AfterSalesTeaser.tsx
+│   │   ├── FAQ.tsx
+│   │   ├── FeaturedModels.tsx
+│   │   ├── FinalCTA.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Steps.tsx
+│   │   ├── Topbar.tsx
+│   │   └── TrustCards.tsx
+│   └── landing_20260513_230425
+│       └── PremiumLanding.tsx
+├── build.log
+├── clean.sh
+├── docker-compose.yml
+├── messages
+│   ├── en.json
+│   └── fa.json
+├── middleware.ts
+├── next-env.d.ts
+├── next.config.mjs
+├── nginx
+│   └── nginx.conf
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── project-snapshot.txt
+├── public
+│   ├── .DS_Store
+│   ├── fonts
+│   │   ├── IRANSansXFaNum-Bold.woff
+│   │   ├── IRANSansXFaNum-DemiBold.woff
+│   │   ├── IRANSansXFaNum-Regular.woff
+│   │   └── IRANSansXFaNum-Thin.woff
+│   ├── images
+│   │   ├── about-us.webp
+│   │   ├── astra-2024.webp
+│   │   ├── astra-banner-new.jpg
+│   │   ├── astra-banner.png
+│   │   ├── astra-hero.webp
+│   │   ├── astra-new.png
+│   │   ├── astra.webp
+│   │   ├── banner1.jpg
+│   │   ├── banner2.avif
+│   │   ├── banner2.jpg
+│   │   ├── banner3.jpg
+│   │   ├── corsa-banner-new.jpg
+│   │   ├── corsa-banner.png
+│   │   ├── corsa-detail.jpg
+│   │   ├── corsa-new.png
+│   │   ├── corsa.webp
+│   │   ├── kombo-e.webp
+│   │   ├── logo.png
+│   │   ├── logo_opel.png
+│   │   ├── logo_opel_full.png
+│   │   ├── logo_site.png
+│   │   ├── mokka-2024.webp
+│   │   ├── mokka-banner-new.jpg
+│   │   ├── mokka-banner.png
+│   │   ├── mokka-e-2024.webp
+│   │   ├── mokka-e-new.png
+│   │   ├── mokka-e.webp
+│   │   ├── mokka-hero.webp
+│   │   ├── mokka-new.png
+│   │   ├── mokka.webp
+│   │   ├── opel-icon.png
+│   │   ├── opel-logo-hero.webp
+│   │   ├── repair-shop.webp
+│   │   ├── roadside-assist.webp
+│   │   ├── sikas-logo.png
+│   │   ├── technical-unit.webp
+│   │   ├── training-center.webp
+│   │   ├── training.webp
+│   │   ├── warranty-unit.webp
+│   │   ├── warranty.webp
+│   │   └── zafira-e.webp
+│   ├── robots.txt
+│   ├── site.webmanifest
+│   └── sitemap.xml
+├── scripts
+│   ├── project-health-check.sh
+│   ├── project-tree.js
+│   ├── structure.txt
+│   └── tree.js
+├── src
+│   ├── app
+│   │   ├── [locale]
+│   │   │   ├── about
+│   │   │   │   └── page.tsx
+│   │   │   ├── agencies
+│   │   │   │   └── page.tsx
+│   │   │   ├── blog
+│   │   │   │   ├── [slug]
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── contact
+│   │   │   │   └── page.tsx
+│   │   │   ├── faq
+│   │   │   │   └── page.tsx
+│   │   │   ├── layout-meta.ts
+│   │   │   ├── layout.tsx
+│   │   │   ├── models
+│   │   │   │   ├── [slug]
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── page.tsx
+│   │   │   └── services
+│   │   │       ├── [slug]
+│   │   │       │   └── page.tsx
+│   │   │       └── page.tsx
+│   │   ├── actions
+│   │   │   └── contact.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── config
+│   ├── content
+│   │   ├── benefits.ts
+│   │   ├── discover.ts
+│   │   ├── home.ts
+│   │   ├── models.ts
+│   │   ├── pages.ts
+│   │   └── premium.ts
+│   ├── entities
+│   │   ├── article
+│   │   ├── model
+│   │   └── service
+│   ├── features
+│   │   ├── blog
+│   │   │   ├── api
+│   │   │   ├── components
+│   │   │   └── types
+│   │   ├── home
+│   │   │   ├── components
+│   │   │   │   ├── Contact.tsx
+│   │   │   │   ├── Footer.tsx
+│   │   │   │   ├── Header.tsx
+│   │   │   │   ├── Hero.tsx
+│   │   │   │   ├── Products.tsx
+│   │   │   │   ├── Services.tsx
+│   │   │   │   └── WhyUs.tsx
+│   │   │   ├── hooks
+│   │   │   ├── lib
+│   │   │   ├── sections
+│   │   │   │   ├── AgencyMapSection.tsx
+│   │   │   │   ├── ContactSection.tsx
+│   │   │   │   ├── DiscoverSlider.tsx
+│   │   │   │   ├── Hero.tsx
+│   │   │   │   ├── HeroSection.tsx
+│   │   │   │   ├── LatestNews.tsx
+│   │   │   │   ├── ModelsSection.tsx
+│   │   │   │   ├── ModelsShowcase.tsx
+│   │   │   │   ├── ModelsShowcaseClient.tsx
+│   │   │   │   ├── NewsSection.tsx
+│   │   │   │   ├── ServicesSection.tsx
+│   │   │   │   ├── WhyUs.tsx
+│   │   │   │   └── WhyUsSection.tsx
+│   │   │   └── types
+│   │   ├── models
+│   │   │   ├── api
+│   │   │   ├── components
+│   │   │   └── types
+│   │   └── premium
+│   │       └── components
+│   │           ├── BenefitsSection.tsx
+│   │           ├── DiscoverSection.tsx
+│   │           ├── FAQSection.tsx
+│   │           ├── HeroCarousel.tsx
+│   │           ├── PremiumContact.tsx
+│   │           ├── PremiumProducts.tsx
+│   │           ├── PremiumServices.tsx
+│   │           ├── PremiumServices.tsx.backup
+│   │           └── PremiumServicesGrid.tsx
+│   ├── i18n
+│   │   ├── request.ts
+│   │   └── routing.ts
+│   ├── lib
+│   │   ├── data.ts
+│   │   └── utils.ts
+│   ├── services
+│   │   ├── api
+│   │   └── http
+│   ├── shared
+│   │   ├── components
+│   │   ├── constants
+│   │   ├── hooks
+│   │   ├── layout
+│   │   │   ├── ApplePremiumHeader.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   ├── Header.tsx
+│   │   │   └── PremiumFooter.tsx
+│   │   ├── layouts
+│   │   ├── lib
+│   │   ├── types
+│   │   └── ui
+│   │       ├── Button.tsx
+│   │       ├── FloatingChatButton.tsx
+│   │       ├── OptimizedImage.tsx
+│   │       └── Tabs.tsx
+│   ├── store
+│   │   ├── configurator.store.ts
+│   │   └── ui.store.ts
+│   ├── styles
+│   │   └── globals.css
+│   └── types
+│       └── index.ts
+├── structure.txt
+├── tailwind.config.ts
+├── tsconfig.json
+└── tsconfig.tsbuildinfo
