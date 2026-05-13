@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 
-export function PremiumWhyUs() {
+export default function WhyUs() {
   const features = [
     {
       title: 'واردکننده رسمی اوپل',

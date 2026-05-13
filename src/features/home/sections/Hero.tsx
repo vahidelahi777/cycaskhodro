@@ -31,7 +31,7 @@ const HERO_SLIDES = [
   },
 ]
 
-export function AppleHero() {
+export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {

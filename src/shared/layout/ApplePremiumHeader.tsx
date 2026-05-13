@@ -15,7 +15,7 @@ const navItems = [
   { label: 'نمایندگی ها', href: '/dealers' },
 ]
 
-export function ApplePremiumHeader() {
+export default function ApplePremiumHeader() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()

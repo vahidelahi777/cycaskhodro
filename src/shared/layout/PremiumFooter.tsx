@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
-export function PremiumFooter() {
+export default function PremiumFooter() {
   return (
     <footer className="bg-white border-t border-gray-200">
       <div className="container mx-auto px-4 py-12">

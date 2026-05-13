@@ -1,12 +1,13 @@
 import { Metadata } from 'next'
-import { ApplePremiumHeader } from '@/components/premium/ApplePremiumHeader'
-import { AppleHero } from '@/components/premium/AppleHero'
-import { PremiumWhyUs } from '@/components/premium/PremiumWhyUs'
-import  DiscoverSlider  from '@/components/Discover/DiscoverSlider'
-import { PremiumFooter } from '@/components/premium/PremiumFooter'
-import ModelsShowcase from '@/components/ModelsShowcase/ModelsShowcase'
-import { LatestNews } from '@/components/premium/LatestNews'
 
+import ApplePremiumHeader from '@/shared/layout/ApplePremiumHeader'
+import PremiumFooter from '@/shared/layout/PremiumFooter'
+
+import Hero from '@/features/home/sections/Hero'
+import WhyUs from '@/features/home/sections/WhyUs'
+import DiscoverSlider from '@/features/home/sections/DiscoverSlider'
+import ModelsShowcase from '@/features/home/sections/ModelsShowcase'
+import LatestNews from '@/features/home/sections/LatestNews'
 
 export const metadata: Metadata = {
   title: 'سیکاس خودرو | نمایندگی رسمی اوپل در ایران',
@@ -27,11 +28,11 @@ export default function Home() {
     <div className="bg-white">
       <ApplePremiumHeader />
       <main>
-        <AppleHero />
+        <Hero />
         <ModelsShowcase />
-        <DiscoverSlider/>
-        <PremiumWhyUs />
-        <LatestNews/>
+        <DiscoverSlider />
+        <WhyUs />
+        <LatestNews />
       </main>
       <PremiumFooter />
     </div>

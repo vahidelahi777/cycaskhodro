@@ -48,7 +48,7 @@ const newsData: NewsItem[] = [
   }
 ]
 
-export function LatestNews() {
+export default function LatestNews() {
   const [selectedCategory, setSelectedCategory] = useState<string>('همه')
   
   const categories = ['همه', 'محصولات', 'اخبار شرکت', 'آموزش', 'خدمات']
