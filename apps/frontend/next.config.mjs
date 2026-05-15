@@ -8,11 +8,7 @@ const nextConfig = {
   output: 'standalone',
   // ... 
 
-  // Fix for Node.js 23 + webpack cache snapshot issue
-  webpack: (config) => {
-    config.cache = false
-    return config
-  },
+
 
   images: {
     unoptimized: true,
