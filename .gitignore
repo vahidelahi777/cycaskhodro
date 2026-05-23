@@ -16,3 +16,15 @@ coverage/
 *.tsbuildinfo
 .vercel/
 public/uploads/
+
+# Dead-code / temporary file extensions — never commit these
+*.disabled
+*.backup
+*.bak
+
+# Build artifacts
+build.log
+
+# Legacy / migration archives
+_migration_backups*/
+_legacy_archive/
