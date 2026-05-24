@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { OptimizedImage } from '@/shared/ui/OptimizedImage'
+import { Link } from '@/i18n/navigation'
 
 interface NewsItem {
   id: number
@@ -11,159 +12,170 @@ interface NewsItem {
   date: string
   image: string
   category: string
+  readTime: string
 }
 
 const newsData: NewsItem[] = [
   {
     id: 1,
-    title: 'معرفی مدل جدید اوپل آسترا 2024',
-    excerpt: 'جدیدترین نسل از خودروی محبوب اوپل آسترا با تکنولوژی‌های پیشرفته و طراحی مدرن معرفی شد.',
-    date: '1403/02/15',
-    image: '/images/news-1.jpg',
-    category: 'محصولات'
+    title: 'معرفی مدل جدید اوپل آسترا ۲۰۲۴',
+    excerpt: 'جدیدترین نسل از خودروی محبوب اوپل آسترا با تکنولوژی‌های پیشرفته و طراحی مدرن وارد بازار ایران شد.',
+    date: '۱۵ اردیبهشت ۱۴۰۳',
+    image: '/images/astra-banner-new.jpg',
+    category: 'محصولات',
+    readTime: '۳ دقیقه',
   },
   {
     id: 2,
     title: 'افتتاح نمایندگی جدید در شمال تهران',
     excerpt: 'نمایندگی مجهز سیکاس خودرو در منطقه ولنجک با ارائه خدمات کامل فروش و خدمات پس از فروش افتتاح شد.',
-    date: '1403/02/10',
-    image: '/images/news-2.jpg',
-    category: 'اخبار شرکت'
+    date: '۱۰ اردیبهشت ۱۴۰۳',
+    image: '/images/mokka-banner-new.jpg',
+    category: 'اخبار شرکت',
+    readTime: '۲ دقیقه',
   },
   {
     id: 3,
     title: 'برگزاری دوره آموزشی تعمیرات پیشرفته',
     excerpt: 'مرکز آموزش سیکاس خودرو دوره تخصصی تعمیرات سیستم‌های الکترونیکی خودروهای اوپل را برگزار می‌کند.',
-    date: '1403/02/05',
-    image: '/images/news-3.jpg',
-    category: 'آموزش'
+    date: '۵ اردیبهشت ۱۴۰۳',
+    image: '/images/training.webp',
+    category: 'آموزش',
+    readTime: '۴ دقیقه',
   },
   {
     id: 4,
-    title: 'طرح ویژه خدمات پس از فروش بهار 1403',
-    excerpt: 'بسته ویژه خدمات تعمیر و نگهداری با تخفیف‌های ویژه برای مشتریان عزیز در فصل بهار ارائه می‌شود.',
-    date: '1403/01/28',
-    image: '/images/news-4.jpg',
-    category: 'خدمات'
-  }
+    title: 'طرح ویژه خدمات پس از فروش بهار ۱۴۰۳',
+    excerpt: 'بسته ویژه خدمات تعمیر و نگهداری با تخفیف‌های استثنایی برای مشتریان عزیز در فصل بهار ارائه می‌شود.',
+    date: '۲۸ فروردین ۱۴۰۳',
+    image: '/images/warranty.webp',
+    category: 'خدمات',
+    readTime: '۲ دقیقه',
+  },
 ]
 
+const categories = ['همه', 'محصولات', 'اخبار شرکت', 'آموزش', 'خدمات']
+
 export default function LatestNews() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('همه')
-  
-  const categories = ['همه', 'محصولات', 'اخبار شرکت', 'آموزش', 'خدمات']
-  
-  const filteredNews = selectedCategory === 'همه' 
-    ? newsData 
-    : newsData.filter(item => item.category === selectedCategory)
+  const [selected, setSelected] = useState('همه')
+
+  const filtered = selected === 'همه'
+    ? newsData
+    : newsData.filter((n) => n.category === selected)
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-neutral-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        {/* Header */}
+    <section className="section-padding bg-white" dir="rtl">
+      <div className="section-container">
+
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          transition={{ duration: 0.7 }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
-            آخرین اخبار
-          </h2>
-          <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
-            از جدیدترین اخبار، رویدادها و به‌روزرسانی‌های سیکاس خودرو مطلع شوید
-          </p>
+          <div>
+            <div className="inline-flex items-center gap-2 border border-opel-yellow/60 bg-opel-yellow/10 text-opel-yellow text-xs font-bold tracking-widest uppercase px-4 py-2 mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-opel-yellow" />
+              اخبار و رویدادها
+            </div>
+            <h2 className="section-title text-opel-black">آخرین اخبار</h2>
+          </div>
+          <Link
+            href="/blog"
+            className="btn-opel-secondary shrink-0 self-start md:self-auto"
+            style={{ color: '#0A0A0A', borderColor: '#0A0A0A' }}
+          >
+            مشاهده همه اخبار
+          </Link>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* ── Category filter ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex flex-wrap gap-2 mb-10"
         >
-          {categories.map((category) => (
+          {categories.map((cat) => (
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full transition-all ${
-                selectedCategory === category
-                  ? 'bg-yellow-400 text-neutral-900 font-semibold'
-                  : 'bg-white text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
+              key={cat}
+              onClick={() => setSelected(cat)}
+              className={`px-5 py-2 text-sm font-semibold transition-all duration-200 border ${
+                selected === cat
+                  ? 'bg-opel-black text-opel-yellow border-opel-black'
+                  : 'bg-white text-opel-gray-700 border-opel-gray-300 hover:border-opel-black hover:text-opel-black'
               }`}
             >
-              {category}
+              {cat}
             </button>
           ))}
         </motion.div>
 
-        {/* News Grid */}
+        {/* ── News grid ── */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={selectedCategory}
-            initial={{ opacity: 0, y: 20 }}
+            key={selected}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-opel-gray-100"
           >
-            {filteredNews.map((news, index) => (
+            {filtered.map((news, i) => (
               <motion.article
                 key={news.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                className="group bg-white flex flex-col"
               >
                 {/* Image */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48 overflow-hidden shrink-0">
                   <OptimizedImage
                     src={news.image}
                     alt={news.title}
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   />
-                  <div className="absolute top-4 right-4 bg-yellow-400 text-neutral-900 px-3 py-1 rounded-full text-sm font-semibold">
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+                  <div className="absolute top-3 right-3 bg-opel-yellow text-opel-black px-2 py-0.5 text-xs font-bold">
                     {news.category}
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <p className="text-neutral-500 text-sm mb-2">{news.date}</p>
-                  <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-yellow-600 transition-colors">
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 text-opel-gray-500 text-xs mb-3">
+                    <span>{news.date}</span>
+                    <span className="w-1 h-1 rounded-full bg-opel-gray-300" />
+                    <span>{news.readTime} مطالعه</span>
+                  </div>
+                  <h3 className="text-base font-bold text-opel-black mb-3 leading-snug group-hover:text-opel-yellow transition-colors duration-200 line-clamp-2">
                     {news.title}
                   </h3>
-                  <p className="text-neutral-600 text-sm leading-relaxed mb-4">
+                  <p className="text-opel-gray-500 text-sm leading-relaxed mb-5 line-clamp-3 flex-1">
                     {news.excerpt}
                   </p>
-                  <button className="text-yellow-600 font-semibold text-sm hover:text-yellow-700 transition-colors flex items-center gap-2">
+                  <Link
+                    href={`/blog/${news.id}`}
+                    className="inline-flex items-center gap-2 text-sm font-bold text-opel-black hover:text-opel-yellow transition-colors duration-200 mt-auto"
+                  >
                     ادامه مطلب
-                    <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <polyline points="15 18 9 12 15 6" />
                     </svg>
-                  </button>
+                  </Link>
                 </div>
               </motion.article>
             ))}
           </motion.div>
         </AnimatePresence>
 
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="text-center mt-12"
-        >
-          <button className="bg-neutral-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-neutral-800 transition-all hover:scale-105">
-            مشاهده همه اخبار
-          </button>
-        </motion.div>
       </div>
     </section>
   )

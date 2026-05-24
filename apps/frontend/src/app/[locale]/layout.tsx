@@ -1,23 +1,25 @@
-import type { Metadata } from 'next'
-import { ReactNode } from 'react'
-
-export const generateMetadata = (): Metadata => {
-  return {
-    title: 'سیکاس خودرو | نمایندگی رسمی اوپل در ایران',
-    description:
-      'سیکاس خودرو، نمایندگی رسمی و واردکننده خودروهای اوپل در ایران.',
-  }
-}
+import { notFound } from 'next/navigation'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
 
 type Props = {
-  children: ReactNode
-  params: Promise<{
-    locale: string
-  }>
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
 }
 
-export default async function LocaleLayout({
-  children,
-}: Props) {
-  return <>{children}</>
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params
+
+  if (!routing.locales.includes(locale as 'fa' | 'en')) {
+    notFound()
+  }
+
+  const messages = await getMessages()
+
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      {children}
+    </NextIntlClientProvider>
+  )
 }
