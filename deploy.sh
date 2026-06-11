@@ -7,7 +7,7 @@
 
 set -e
 
-REPO="https://github.com/vahidelahi777/cycaskhodro.git"
+REPO="git@github.com:vahidelahi777/cycaskhodro.git"
 APP_DIR="/var/www/cycaskhodro"
 APP_NAME="cycaskhodro"
 PORT=3001
@@ -50,7 +50,33 @@ if ! command -v git &>/dev/null; then
   apt-get install -y git
 fi
 
-# ─── 5. Clone or update repo ──────────────────────────────────
+# ─── 5. Setup SSH key for GitHub ─────────────────────────────
+if [[ ! -f ~/.ssh/id_ed25519 ]]; then
+  warn "Generating SSH key..."
+  mkdir -p ~/.ssh
+  ssh-keygen -t ed25519 -C "cycaskhodro-server" -f ~/.ssh/id_ed25519 -N ""
+  chmod 600 ~/.ssh/id_ed25519
+fi
+
+# Add GitHub to known_hosts to avoid interactive prompt
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts 2>/dev/null
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  Add this SSH key to GitHub:"
+echo "  GitHub → Settings → SSH Keys → New SSH key"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+cat ~/.ssh/id_ed25519.pub
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+read -p "Press ENTER after adding the key to GitHub..."
+
+# Test connection
+ssh -T git@github.com 2>&1 | grep -q "successfully authenticated" \
+  && log "GitHub SSH connected." \
+  || warn "SSH test returned non-zero (normal if repo is public)"
+
+# ─── 7. Clone or update repo ──────────────────────────────────
 if [[ "$1" == "update" ]] && [[ -d "$APP_DIR/.git" ]]; then
   log "Pulling latest code..."
   cd "$APP_DIR"
@@ -67,12 +93,12 @@ else
   fi
 fi
 
-# ─── 6. Install dependencies ──────────────────────────────────
+# ─── 8. Install dependencies ──────────────────────────────────
 log "Installing dependencies..."
 cd "$APP_DIR/apps/frontend"
 npm ci --prefer-offline 2>/dev/null || npm install
 
-# ─── 7. Build ─────────────────────────────────────────────────
+# ─── 9. Build ─────────────────────────────────────────────────
 log "Building production bundle..."
 NODE_OPTIONS="--max-old-space-size=4096" \
 NEXT_TELEMETRY_DISABLED=1 \
