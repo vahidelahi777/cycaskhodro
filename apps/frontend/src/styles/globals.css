@@ -1,0 +1,191 @@
+/* ───────────────── FONT FACES ───────────────── */
+
+@font-face {
+  font-family: "IRANSansX";
+  src: url("/fonts/IRANSansXFaNum-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansX";
+  src: url("/fonts/IRANSansXFaNum-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansX";
+  src: url("/fonts/IRANSansXFaNum-DemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansX";
+  src: url("/fonts/IRANSansXFaNum-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ───────────────── TAILWIND ───────────────── */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ───────────────── DESIGN TOKENS ───────────────── */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --primary: 49 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+
+    --ring: 49 100% 50%;
+    --radius: 0.125rem;
+  }
+}
+
+
+/* ───────────────── BASE STYLES ───────────────── */
+
+@layer base {
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html[lang="fa"],
+  [dir="rtl"] {
+    direction: rtl;
+    font-family: "IRANSansX", Tahoma, Arial, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01","ss02","cv01","cv02";
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    @apply font-black tracking-tight uppercase;
+    line-height: 1.1;
+  }
+
+  img,video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ::selection {
+    @apply bg-opel-yellow text-opel-black;
+  }
+}
+
+
+/* ───────────────── COMPONENTS ───────────────── */
+
+@layer components {
+
+  .section-container {
+    @apply max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16;
+  }
+
+  .section-padding {
+    @apply py-24 md:py-32;
+  }
+
+  .section-title {
+    @apply text-5xl md:text-7xl font-black uppercase leading-[0.9] tracking-tighter;
+  }
+
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-opel-card;
+  }
+
+  /* Buttons */
+
+  .btn-opel-primary {
+    @apply inline-flex items-center justify-center
+    bg-opel-yellow text-opel-black
+    font-bold uppercase tracking-widest
+    px-8 py-4 text-sm
+    transition-all duration-300
+    hover:bg-opel-yellow-dark hover:shadow-opel-glow
+    active:scale-95;
+  }
+
+  .btn-opel-secondary {
+    @apply inline-flex items-center justify-center
+    border-2 border-white text-white
+    font-bold uppercase tracking-widest
+    px-8 py-4 text-sm
+    transition-all duration-300
+    hover:bg-white hover:text-opel-black;
+  }
+
+  .vehicle-card {
+    @apply relative overflow-hidden bg-white
+    transition-all duration-500 hover:shadow-opel-hover;
+  }
+
+}
+
+
+/* ───────────────── UTILITIES ───────────────── */
+
+@layer utilities {
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .video-bg {
+    @apply absolute inset-0 w-full h-full object-cover;
+  }
+
+  .overlay-dark {
+    @apply absolute inset-0 bg-black/50;
+  }
+
+  .overlay-gradient-bottom {
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+}

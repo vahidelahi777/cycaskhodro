@@ -1,18 +1,128 @@
+# ---------------------------------------------------
+# Dependencies
+# ---------------------------------------------------
 node_modules/
+
+# Package managers
+.pnpm-store/
+.npm/
+.yarn/
+.yarn-cache/
+
+# ---------------------------------------------------
+# Next.js / React
+# ---------------------------------------------------
 .next/
 out/
+build/
 dist/
-.env
-.env.local
-.env*.local
-.env.production
+
+# Next.js cache
+.next/cache/
+
+# Static export uploads
+public/uploads/
+
+# ---------------------------------------------------
+# TurboRepo
+# ---------------------------------------------------
+.turbo/
+
+# ---------------------------------------------------
+# Logs
+# ---------------------------------------------------
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.DS_Store
-.turbo/
-coverage/
+pnpm-debug.log*
+build.log
+
+# ---------------------------------------------------
+# Environment / Secrets
+# ---------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# Optional explicit ignores
+.env.local
+.env.production
+.env.development
+
+# Certificates / secrets
+*.pem
+*.key
+*.crt
+secrets/
+credentials/
+
+# ---------------------------------------------------
+# TypeScript
+# ---------------------------------------------------
 *.tsbuildinfo
+
+# ---------------------------------------------------
+# Coverage / Testing
+# ---------------------------------------------------
+coverage/
+.nyc_output/
+
+# Playwright / Cypress
+playwright-report/
+test-results/
+cypress/videos/
+cypress/screenshots/
+
+# ---------------------------------------------------
+# Vercel / Deployment
+# ---------------------------------------------------
 .vercel/
-public/uploads/
+
+# ---------------------------------------------------
+# Docker
+# ---------------------------------------------------
+docker-data/
+*.pid
+
+# ---------------------------------------------------
+# OS files
+# ---------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# ---------------------------------------------------
+# IDE / Editor
+# ---------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---------------------------------------------------
+# Archives / backups / migrations
+# ---------------------------------------------------
+_archived_backup/
+_legacy_archive/
+_migration_backups*/
+*_backup*/
+backup/
+backups/
+
+# ---------------------------------------------------
+# Temporary / dead code
+# ---------------------------------------------------
+*.disabled
+*.backup
+*.bak
+*.old
+*.orig
+*.tmp
+*.temp
+
+# ---------------------------------------------------
+# Misc
+# ---------------------------------------------------
+.cache/
+tmp/
+temp/
