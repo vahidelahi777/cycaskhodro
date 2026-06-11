@@ -19,7 +19,7 @@ const IMAGE_INTERVAL = 5000
 
 export default function Hero() {
   const [current, setCurrent] = useState(0)
-  const [videoEnded, setVideoEnded] = useState(false)
+  const [, setVideoEnded] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const timerRef = useRef<ReturnType<typeof setTimeout>>()
 

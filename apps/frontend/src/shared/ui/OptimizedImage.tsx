@@ -22,15 +22,12 @@ export function OptimizedImage({
   className,
   width,
   height,
-  quality = 85,
+  quality = 80,
   priority = false,
   sizes,
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
-
-  // Check if it's an external URL or local
-  const isExternal = src.startsWith('http')
 
   return (
     <>
@@ -40,7 +37,7 @@ export function OptimizedImage({
           alt={alt}
           fill
           className={`${className} ${isLoading ? 'blur-sm' : 'blur-0'} transition-all duration-300`}
-          onLoadingComplete={() => setIsLoading(false)}
+          onLoad={() => setIsLoading(false)}
           onError={() => setHasError(true)}
           quality={quality}
           priority={priority}
@@ -53,14 +50,13 @@ export function OptimizedImage({
           width={width}
           height={height}
           className={`${className} ${isLoading ? 'blur-sm' : 'blur-0'} transition-all duration-300`}
-          onLoadingComplete={() => setIsLoading(false)}
+          onLoad={() => setIsLoading(false)}
           onError={() => setHasError(true)}
           quality={quality}
           priority={priority}
         />
       )}
 
-      {/* Fallback placeholder if image fails to load */}
       {hasError && (
         <div className={`${className} bg-neutral-200 flex items-center justify-center text-neutral-500`}>
           <span className="text-sm">تصویر دستیافتنی نیست</span>

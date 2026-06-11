@@ -1,11 +1,8 @@
 'use client';
 
-import { MessageCircle, X } from 'lucide-react';
-import { useState } from 'react';
+import { MessageCircle } from 'lucide-react';
 
 export function FloatingChatButton() {
-  const [isOpen, setIsOpen] = useState(false);
-
   const handleChatClick = () => {
     // می‌تونی به صفحه تماس هدایت کنی یا یک modal باز کنی
     window.location.href = '/fa/contact'; // یا هر locale دیگه

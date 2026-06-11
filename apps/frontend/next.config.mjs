@@ -9,6 +9,7 @@ const nextConfig = {
 
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [40, 60, 75, 80, 90],
     remotePatterns: [
       { protocol: 'https', hostname: 'cycaskhodro.com' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
@@ -20,12 +21,17 @@ const nextConfig = {
   },
 
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-icons'],
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
 
   compress: true,
 
   poweredByHeader: false,
+
+  webpack: (config) => {
+    config.cache = false
+    return config
+  },
 }
 
 export default withNextIntl(nextConfig)

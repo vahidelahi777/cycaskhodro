@@ -26,7 +26,7 @@ export function PremiumContact() {
       console.log('Form submitted:', data)
       toast.success('پیام شما با موفقیت ارسال شد!')
       e.currentTarget.reset()
-    } catch (error) {
+    } catch {
       toast.error('خطا در ارسال پیام')
     } finally {
       setIsSubmitting(false)
