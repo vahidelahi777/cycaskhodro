@@ -29,8 +29,4 @@ jobs:
         run: npm run build
 
       - name: Restart app
-        run: |
-          pm2 reload cycaskhodro --update-env || \
-          pm2 start npm --name cycaskhodro \
-            --cwd ${{ github.workspace }}/apps/frontend -- start
-          pm2 save
+        run: sudo systemctl restart cycaskhodro
