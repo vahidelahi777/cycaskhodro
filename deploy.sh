@@ -8,7 +8,7 @@
 set -e
 
 REPO="https://github.com/vahidelahi777/cycaskhodro.git"
-APP_DIR="/var/www/cycaskhodro"
+APP_DIR="/opt/cycaskhodro"
 APP_NAME="cycaskhodro"
 PORT=3001
 NODE_REQUIRED="20"
