@@ -1,23 +1,20 @@
-name: Build & Deploy
+name: Deploy to Production
 
 on:
   push:
     branches: [master]
 
 jobs:
-  # ─────────────────────────────────────────
-  #  JOB 1 — Build & type-check
-  # ─────────────────────────────────────────
-  build:
-    name: Build
+  deploy:
+    name: Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: npm
@@ -31,28 +28,39 @@ jobs:
         working-directory: apps/frontend
         run: npx tsc --noEmit
 
-      - name: Build
-        working-directory: apps/frontend
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096
-          NEXT_TELEMETRY_DISABLED: 1
-        run: npm run build
-
-  # ─────────────────────────────────────────
-  #  JOB 2 — Deploy to production server
-  # ─────────────────────────────────────────
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Deploy via SSH
+      - name: Deploy to server
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
           port: 22
+          command_timeout: 15m
           script: |
-            bash /var/www/cycaskhodro/deploy.sh update
+            set -e
+
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+            export PATH="/usr/local/bin:/usr/bin:$PATH"
+
+            APP_DIR="/var/www/cycaskhodro"
+
+            echo "→ Pulling latest code..."
+            cd "$APP_DIR"
+            GIT_TERMINAL_PROMPT=0 git pull origin master
+
+            echo "→ Installing dependencies..."
+            cd "$APP_DIR/apps/frontend"
+            npm ci
+
+            echo "→ Building..."
+            NODE_OPTIONS="--max-old-space-size=4096" \
+            NEXT_TELEMETRY_DISABLED=1 \
+            npm run build
+
+            echo "→ Restarting app..."
+            pm2 reload cycaskhodro --update-env || \
+            pm2 start npm --name cycaskhodro --cwd "$APP_DIR/apps/frontend" -- start
+
+            pm2 save
+            echo "✓ Deploy complete"
