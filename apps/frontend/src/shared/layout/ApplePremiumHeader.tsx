@@ -367,7 +367,7 @@ export default function ApplePremiumHeader() {
 
           <button
             onClick={() => setIsOpen((prev) => !prev)}
-            className="flex items-center justify-center rounded-2xl p-2 transition-colors duration-200 hover:bg-neutral-100 lg:hidden"
+            className="flex items-center justify-center w-11 h-11 rounded-xl transition-colors duration-200 hover:bg-neutral-100 lg:hidden"
             aria-label="Toggle Menu"
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
