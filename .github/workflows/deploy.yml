@@ -7,16 +7,11 @@ on:
 jobs:
   deploy:
     name: Build & Deploy
-    runs-on: ubuntu-latest
+    runs-on: self-hosted   # ← runs ON your server, no inbound SSH needed
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: 20
 
       - name: Install dependencies
         working-directory: apps/frontend
@@ -26,39 +21,16 @@ jobs:
         working-directory: apps/frontend
         run: npx tsc --noEmit
 
-      - name: Deploy to server
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASS }}
-          port: 22
-          command_timeout: 15m
-          script: |
-            set -e
+      - name: Build
+        working-directory: apps/frontend
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+          NEXT_TELEMETRY_DISABLED: "1"
+        run: npm run build
 
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-            export PATH="/usr/local/bin:/usr/bin:$PATH"
-
-            APP_DIR="/var/www/cycaskhodro"
-
-            echo "→ Pulling latest code..."
-            cd "$APP_DIR"
-            GIT_TERMINAL_PROMPT=0 git pull origin master
-
-            echo "→ Installing dependencies..."
-            cd "$APP_DIR/apps/frontend"
-            npm ci
-
-            echo "→ Building..."
-            NODE_OPTIONS="--max-old-space-size=4096" \
-            NEXT_TELEMETRY_DISABLED=1 \
-            npm run build
-
-            echo "→ Restarting app..."
-            pm2 reload cycaskhodro --update-env || \
-            pm2 start npm --name cycaskhodro --cwd "$APP_DIR/apps/frontend" -- start
-
-            pm2 save
-            echo "✓ Deploy complete"
+      - name: Restart app
+        run: |
+          pm2 reload cycaskhodro --update-env || \
+          pm2 start npm --name cycaskhodro \
+            --cwd ${{ github.workspace }}/apps/frontend -- start
+          pm2 save
