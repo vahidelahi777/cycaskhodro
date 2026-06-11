@@ -107,7 +107,7 @@ export default function LatestNews() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
           >
             {filtered.map((news, i) => (
               <motion.article
@@ -161,7 +161,7 @@ export default function LatestNews() {
           transition={{ delay: 0.3 }}
           className="text-center mt-12"
         >
-          <Link href="/fa/news" className="btn-opel-secondary">
+          <Link href="/fa/news" className="btn-opel-primary">
             مشاهده همه اخبار
           </Link>
         </motion.div>

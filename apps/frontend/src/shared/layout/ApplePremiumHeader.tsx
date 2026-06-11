@@ -143,9 +143,8 @@ export default function ApplePremiumHeader() {
   const pathname = usePathname()
 
   const [isOpen, setIsOpen] = useState(false)
-
   const [openMenu, setOpenMenu] = useState<string | null>(null)
-
+  const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
 
   // =========================
@@ -377,102 +376,107 @@ export default function ApplePremiumHeader() {
       </nav>
 
       {/* ========================= */}
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU — full-screen overlay */}
       {/* ========================= */}
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{
-              opacity: 0,
-              y: -10,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              y: -10,
-            }}
-            transition={{
-              duration: 0.25,
-            }}
-            className="border-t border-black/5 bg-white/90 backdrop-blur-3xl lg:hidden"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'tween', duration: 0.28 }}
+            className="fixed inset-0 z-[200] bg-white lg:hidden flex flex-col"
+            dir="rtl"
           >
-            <div className="space-y-2 px-4 py-4">
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-neutral-100">
+              <Image
+                src="/images/logo_site.png"
+                alt="سیکاس خودرو"
+                width={60}
+                height={42}
+                className="h-9 w-auto object-contain"
+              />
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-100 text-neutral-700"
+                aria-label="بستن منو"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Nav items */}
+            <nav className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
               {navItems.map((item) => {
-                const hasChildren =
-                  item.children && item.children.length > 0
+                const hasChildren = item.children && item.children.length > 0
+                const isExpanded = openMobileMenu === item.label
 
                 return (
-                  <div
-                    key={item.label}
-                    className="overflow-hidden rounded-2xl border border-black/5 bg-white/70"
-                  >
-                    {/* SIMPLE LINK */}
-
-                    {!hasChildren && item.href && (
+                  <div key={item.label} className="border-b border-neutral-100 last:border-0">
+                    {/* Row */}
+                    {!hasChildren && item.href ? (
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="block px-4 py-3 text-sm text-neutral-800 transition-colors duration-200 hover:bg-black/[0.04]"
+                        className="flex items-center justify-between py-4 px-2 text-base font-semibold text-neutral-800"
                       >
                         {item.label}
                       </Link>
+                    ) : (
+                      <button
+                        onClick={() => setOpenMobileMenu(isExpanded ? null : item.label)}
+                        className="w-full flex items-center justify-between py-4 px-2 text-base font-semibold text-neutral-800"
+                      >
+                        {item.label}
+                        <ChevronDown
+                          size={18}
+                          className={`text-neutral-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                        />
+                      </button>
                     )}
 
-                    {/* DROPDOWN */}
-
-                    {hasChildren && (
-                      <div>
-                        <div className="bg-neutral-50 px-4 py-3 text-sm font-medium text-neutral-900">
-                          {item.label}
-                        </div>
-
-                        <div className="space-y-1 p-2">
-                          {item.children?.map((sub) => {
-                            const hasSubChildren =
-                              sub.children &&
-                              sub.children.length > 0
-
-                            return (
-                              <div key={sub.label}>
-                                <Link
-                                  href={sub.href ?? '#'}
-                                  onClick={() => setIsOpen(false)}
-                                  className="block rounded-xl px-3 py-2 text-sm text-neutral-700 transition-colors duration-200 hover:bg-black/[0.04]"
-                                >
-                                  {sub.label}
-                                </Link>
-
-                                {/* LEVEL 3 */}
-
-                                {hasSubChildren && (
-                                  <div className="mt-1 mr-3 border-r border-neutral-200 pr-2">
-                                    {sub.children?.map((third) => (
-                                      <Link
-                                        key={third.label}
-                                        href={third.href ?? '#'}
-                                        onClick={() =>
-                                          setIsOpen(false)
-                                        }
-                                        className="block rounded-xl px-3 py-2 text-sm text-neutral-600 transition-colors duration-200 hover:bg-black/[0.04]"
-                                      >
-                                        {third.label}
-                                      </Link>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </div>
-                    )}
+                    {/* Sub-items accordion */}
+                    <AnimatePresence>
+                      {hasChildren && isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pb-3 pr-4 space-y-0.5">
+                            {item.children?.map((sub) => (
+                              <Link
+                                key={sub.label}
+                                href={sub.href ?? '#'}
+                                onClick={() => setIsOpen(false)}
+                                className="flex items-center gap-2 py-3 px-3 text-sm text-neutral-600 hover:text-opel-black hover:bg-neutral-50 rounded-lg transition-colors"
+                              >
+                                <span className="w-1 h-1 rounded-full bg-opel-yellow flex-shrink-0" />
+                                {sub.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 )
               })}
+            </nav>
+
+            {/* Footer CTA */}
+            <div className="px-4 py-5 border-t border-neutral-100 bg-neutral-50">
+              <Link
+                href="/fa/contact"
+                onClick={() => setIsOpen(false)}
+                className="btn-opel-primary w-full justify-center text-center"
+              >
+                تماس با ما
+              </Link>
             </div>
           </motion.div>
         )}

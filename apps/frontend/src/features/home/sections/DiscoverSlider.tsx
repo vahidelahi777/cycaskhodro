@@ -74,8 +74,8 @@ export default function DiscoverSlider() {
   const animationStyle = `${direction === 'right' ? 'slideInRight' : 'slideInLeft'} 600ms cubic-bezier(0.16, 1, 0.3, 1)`
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4">
+    <section className="section-padding bg-gradient-to-b from-gray-50 to-white">
+      <div className="section-container">
         <div className="relative max-w-7xl mx-auto">
 
           {TOTAL > 1 && (
@@ -124,7 +124,7 @@ export default function DiscoverSlider() {
 
             <div
               key={`image-${activeIndex}`}
-              className="relative h-[280px] md:h-[400px] lg:h-[480px] order-1 md:order-2"
+              className="relative h-[220px] sm:h-[280px] md:h-[380px] lg:h-[440px] order-1 md:order-2"
               style={{ animation: animationStyle }}
             >
               <OptimizedImage

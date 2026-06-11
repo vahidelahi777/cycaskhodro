@@ -114,12 +114,12 @@ export default function HighlightPanels({ highlights, modelName }: Props) {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 {/* Big number */}
-                <span className="text-[6rem] md:text-[10rem] font-black text-white/10 leading-none select-none block -mb-8">
+                <span className="text-[4rem] md:text-[8rem] font-black text-white/10 leading-none select-none block -mb-6">
                   {current.number}
                 </span>
 
                 {/* Title */}
-                <h3 className="text-3xl md:text-5xl font-black text-white mb-3 leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-3 leading-tight">
                   {current.titleFa}
                 </h3>
                 <p className="text-xs text-opel-yellow tracking-[0.3em] uppercase mb-4">

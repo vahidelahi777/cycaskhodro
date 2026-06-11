@@ -117,10 +117,10 @@ export default function ModelsListingPage() {
               محصولات اوپل
               <span className="w-8 h-px bg-yellow-400" />
             </span>
-            <h1 className="text-5xl md:text-7xl font-black text-white leading-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-4">
               خودروهای اوپل<br />در ایران
             </h1>
-            <p className="text-white/60 text-lg max-w-lg mx-auto mb-8">
+            <p className="text-white/60 text-sm sm:text-base max-w-lg mx-auto mb-8">
               با گارانتی رسمی، خدمات پس از فروش و واردات قانونی از آلمان
             </p>
             <a
@@ -150,14 +150,14 @@ export default function ModelsListingPage() {
       <section className="bg-[#080810] text-white overflow-hidden" id="models">
         <div className="text-center py-16 px-4">
           <p className="text-yellow-400 text-sm font-medium tracking-widest uppercase mb-3">عملکرد و طراحی</p>
-          <h2 className="text-4xl md:text-5xl font-bold">بهترین محصولات اوپل</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">بهترین محصولات اوپل</h2>
           <p className="mt-4 text-white/50 max-w-xl mx-auto">
             مجموعه‌ای از خودروهای اروپایی با فناوری روز دنیا، طراحی منحصربه‌فرد و عملکرد استثنایی
           </p>
         </div>
 
         {/* Model tabs */}
-        <div className="flex justify-center gap-3 px-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 px-4 mb-10">
           {PERFORMANCE_MODELS.map((m, i) => (
             <button
               key={m.id}
@@ -185,7 +185,7 @@ export default function ModelsListingPage() {
             {/* Car image */}
             <div className="relative flex items-center justify-center">
               <div
-                className="absolute w-[400px] h-[400px] rounded-full blur-[120px] opacity-20 pointer-events-none"
+                className="absolute w-[180px] h-[180px] md:w-[360px] md:h-[360px] rounded-full blur-[80px] md:blur-[120px] opacity-20 pointer-events-none"
                 style={{ background: perfModel.accentColor }}
               />
               <motion.div
@@ -213,7 +213,7 @@ export default function ModelsListingPage() {
                 </span>
                 <span className="text-white/30 text-sm tracking-widest uppercase">{perfModel.nameEn}</span>
               </div>
-              <h3 className="text-4xl md:text-5xl font-extrabold leading-tight">{perfModel.headline}</h3>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight">{perfModel.headline}</h3>
               <p className="text-white/60 text-lg leading-relaxed">{perfModel.desc}</p>
               <div className="grid grid-cols-2 gap-4">
                 {perfModel.specs.map((s) => (
@@ -322,7 +322,7 @@ function ModelCard({ model }: { model: (typeof OPEL_MODELS)[0] }) {
       href={`/fa${model.href}`}
       className="group block bg-white border border-neutral-100 hover:border-opel-black overflow-hidden shadow-sm hover:shadow-xl transition-all duration-400"
     >
-      <div className="relative bg-gradient-to-br from-neutral-50 to-neutral-100 h-52 md:h-60 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-neutral-50 to-neutral-100 h-44 sm:h-52 md:h-60 overflow-hidden">
         <div className="absolute top-3 right-3 z-10">
           {model.fuelType === 'electric' ? (
             <span className="inline-flex items-center gap-1 bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">

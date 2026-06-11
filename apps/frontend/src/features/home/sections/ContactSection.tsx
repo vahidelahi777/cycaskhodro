@@ -77,7 +77,7 @@ export function ContactSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-6xl md:text-[8rem] font-black text-opel-black uppercase tracking-tighter leading-[0.8] mb-0"
+                className="text-3xl sm:text-4xl md:text-5xl font-black text-opel-black tracking-tight leading-tight mb-0"
               >
                 {t('title')}
               </motion.h2>

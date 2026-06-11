@@ -81,6 +81,11 @@
     scroll-behavior: smooth;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+  }
+
+  @media (min-width: 640px) {
+    html { font-size: 16px; }
   }
 
   html[lang="fa"],
@@ -95,8 +100,8 @@
   }
 
   h1,h2,h3,h4,h5,h6 {
-    @apply font-black tracking-tight uppercase;
-    line-height: 1.1;
+    @apply font-bold tracking-tight;
+    line-height: 1.2;
   }
 
   img,video {
@@ -115,15 +120,15 @@
 @layer components {
 
   .section-container {
-    @apply max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16;
+    @apply max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   .section-padding {
-    @apply py-24 md:py-32;
+    @apply py-12 md:py-20;
   }
 
   .section-title {
-    @apply text-5xl md:text-7xl font-black uppercase leading-[0.9] tracking-tighter;
+    @apply text-2xl sm:text-3xl md:text-4xl font-black leading-tight tracking-tight;
   }
 
   .glass-card {

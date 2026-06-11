@@ -81,7 +81,7 @@ export function ServicesSection() {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: 0.1 }}
-							className="text-6xl md:text-[8rem] font-black text-opel-black uppercase tracking-tighter leading-[0.8] mb-0"
+							className="text-3xl sm:text-4xl md:text-5xl font-black text-opel-black tracking-tight leading-tight mb-0"
 						>
 							{t('services.title')}
 						</motion.h2>
@@ -109,7 +109,7 @@ export function ServicesSection() {
 								viewport={{ once: true }}
 								transition={{ delay: i * 0.1 }}
 							>
-								<Link href={`/${locale}${service.href}`} className="group relative block bg-white hover:bg-opel-black transition-all duration-700 p-12 lg:p-16 h-full overflow-hidden">
+								<Link href={`/${locale}${service.href}`} className="group relative block bg-white hover:bg-opel-black transition-all duration-700 p-6 sm:p-8 lg:p-12 h-full overflow-hidden">
 									{/* Hover Accent */}
 									<div className="absolute top-0 right-0 w-24 h-24 bg-opel-yellow/0 group-hover:bg-opel-yellow/5 -rotate-45 translate-x-12 -translate-y-12 transition-all duration-700" />
 									

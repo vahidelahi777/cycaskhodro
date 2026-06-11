@@ -90,7 +90,7 @@ export default function DaresToBeDifferent({ vehicle }: Props) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="text-4xl md:text-6xl font-black text-black tracking-widest"
+              className="text-2xl sm:text-3xl md:text-5xl font-black text-black tracking-widest"
             >
               {letter}
             </motion.span>

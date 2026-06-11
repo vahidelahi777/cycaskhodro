@@ -65,7 +65,7 @@ export function AgencyMapSection() {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: 0.1 }}
-							className="text-6xl md:text-[8rem] font-black text-opel-black uppercase tracking-tighter leading-[0.8] mb-0"
+							className="text-3xl sm:text-4xl md:text-5xl font-black text-opel-black tracking-tight leading-tight mb-0"
 						>
 							{t('title')}
 						</motion.h2>
@@ -75,7 +75,7 @@ export function AgencyMapSection() {
 				<div className="grid lg:grid-cols-12 gap-12 items-start">
 					{/* Map placeholder */}
 					<div className="lg:col-span-8 group relative">
-						<div className="h-[600px] bg-[#f2f2f2] relative overflow-hidden border border-black/5">
+						<div className="h-[300px] sm:h-[420px] lg:h-[560px] bg-[#f2f2f2] relative overflow-hidden border border-black/5">
 							{/* Placeholder for Mapbox map */}
 							<div className="absolute inset-0 flex flex-col items-center justify-center text-opel-black/20 group-hover:bg-[#ebebeb] transition-colors duration-700">
 								<MapPin size={80} strokeWidth={1} className="mb-6 opacity-40 group-hover:scale-110 transition-transform duration-700" />

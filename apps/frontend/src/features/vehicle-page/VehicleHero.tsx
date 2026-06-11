@@ -74,7 +74,7 @@ export default function VehicleHero({ vehicle, onConsult, onScrollToTrims }: Pro
           </div>
 
           {/* Model name */}
-          <h1 className="text-[clamp(3.5rem,12vw,9rem)] font-black text-white leading-none tracking-tight uppercase mb-2">
+          <h1 className="text-[clamp(2.2rem,9vw,7rem)] font-black text-white leading-none tracking-tight uppercase mb-2">
             {vehicle.model}
           </h1>
 
@@ -84,33 +84,33 @@ export default function VehicleHero({ vehicle, onConsult, onScrollToTrims }: Pro
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-4 mb-14">
+          <div className="flex flex-wrap gap-3 mb-10">
             <button
               onClick={onScrollToTrims}
-              className="inline-flex items-center justify-center bg-opel-yellow text-black font-black text-sm px-10 py-4 uppercase tracking-widest hover:bg-white transition-colors duration-300"
+              className="inline-flex items-center justify-center bg-opel-yellow text-black font-black text-sm px-6 sm:px-10 py-3.5 uppercase tracking-widest hover:bg-white transition-colors duration-300"
             >
               مشاهده تریم‌ها
             </button>
             <button
               onClick={onConsult}
-              className="inline-flex items-center justify-center border-2 border-white/40 text-white font-bold text-sm px-10 py-4 uppercase tracking-widest hover:border-white hover:bg-white/10 transition-all duration-300"
+              className="inline-flex items-center justify-center border-2 border-white/40 text-white font-bold text-sm px-6 sm:px-10 py-3.5 uppercase tracking-widest hover:border-white hover:bg-white/10 transition-all duration-300"
             >
               درخواست مشاوره
             </button>
           </div>
 
           {/* Key stats bar */}
-          <div className="flex flex-wrap gap-px border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px border border-white/10 bg-white/10 backdrop-blur-sm overflow-hidden">
             {stats.map((s) => (
               <div
                 key={s.label}
-                className="flex-1 min-w-[120px] px-5 py-4 bg-black/20 border-r border-white/8 last:border-0 text-center md:text-right"
+                className="px-4 py-4 bg-black/30 text-center"
               >
-                <p className="text-xl md:text-2xl font-black text-white leading-none">
+                <p className="text-lg sm:text-xl md:text-2xl font-black text-white leading-none">
                   {s.value}
                   {s.unit && <span className="text-xs text-white/50 font-bold ml-1">{s.unit}</span>}
                 </p>
-                <p className="text-[10px] text-white/40 mt-1 tracking-wider uppercase font-bold">{s.label}</p>
+                <p className="text-[9px] text-white/40 mt-1 tracking-wider uppercase font-bold">{s.label}</p>
               </div>
             ))}
           </div>

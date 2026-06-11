@@ -108,7 +108,7 @@ export default function WhyUs() {
               پیشگام در<br />
               <span className="text-opel-yellow">صنعت خودرو</span>
             </h2>
-            <p className="text-opel-gray-500 text-lg leading-relaxed">
+            <p className="text-opel-gray-500 text-sm sm:text-base leading-relaxed">
               با بیش از ۱۵ سال تجربه، پیشگام در واردات و خدمات اوپل در ایران هستیم
             </p>
           </motion.div>
@@ -122,7 +122,7 @@ export default function WhyUs() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.07 }}
-                className="group relative bg-white p-8 hover:bg-opel-gray-100 transition-colors duration-300"
+                className="group relative bg-white p-5 sm:p-6 md:p-8 hover:bg-opel-gray-100 transition-colors duration-300"
               >
                 <div className="w-14 h-14 bg-opel-yellow/10 border border-opel-yellow/30 flex items-center justify-center mb-6 text-opel-gray-700 group-hover:bg-opel-yellow group-hover:text-opel-black transition-all duration-300">
                   {feature.icon}
@@ -166,7 +166,7 @@ export default function WhyUs() {
             </div>
 
             {/* Content */}
-            <div className={`flex flex-col justify-center px-8 py-14 lg:px-16 ${service.imageRight ? 'lg:order-1' : 'lg:order-2'}`}>
+            <div className={`flex flex-col justify-center px-5 py-10 sm:px-8 sm:py-12 lg:px-14 ${service.imageRight ? 'lg:order-1' : 'lg:order-2'}`}>
               <span className="text-opel-yellow text-xs font-bold tracking-[0.25em] uppercase mb-4">
                 خدمات سیکاس خودرو
               </span>
@@ -186,7 +186,7 @@ export default function WhyUs() {
                   </span>
                 ))}
               </div>
-              <Link href={service.href} className="btn-opel-secondary w-fit">
+              <Link href={service.href} className="btn-opel-primary w-fit">
                 اطلاعات بیشتر
               </Link>
             </div>

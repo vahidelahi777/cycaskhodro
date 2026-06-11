@@ -41,7 +41,7 @@ export default function ModelsShowcaseClient() {
             <span className="w-1.5 h-1.5 rounded-full bg-opel-yellow" />
             محصولات اوپل
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-opel-black leading-tight">
+          <h2 className="section-title text-opel-black">
             خودروهای ما
           </h2>
         </motion.div>
@@ -80,7 +80,7 @@ export default function ModelsShowcaseClient() {
         </div>
 
         {/* Car stage */}
-        <div className="relative flex items-center justify-center min-h-[320px] md:min-h-[480px] px-20 md:px-32">
+        <div className="relative flex items-center justify-center min-h-[260px] sm:min-h-[360px] md:min-h-[480px] px-12 sm:px-20 md:px-32">
 
           {/* Left arrow */}
           <button
@@ -161,7 +161,7 @@ export default function ModelsShowcaseClient() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <Link href="/fa/models" className="btn-opel-secondary">
+          <Link href="/fa/models" className="btn-opel-primary">
             مشاهده همه خودروها
           </Link>
         </motion.div>
