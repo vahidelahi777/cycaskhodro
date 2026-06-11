@@ -33,15 +33,15 @@ const navItems: NavItem[] = [
     children: [
       {
         label: 'اوپل موکا E',
-        href: '/fa/models/mokka-e',
+        href: '/fa/models',
       },
       {
         label: 'اوپل موکا',
-        href: '/fa/models/mokka',
+        href: '/fa/models',
       },
       {
         label: 'اوپل آسترا',
-        href: '/fa/models/astra',
+        href: '/fa/models',
       },
     ],
   },

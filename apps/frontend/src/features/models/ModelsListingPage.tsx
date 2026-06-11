@@ -20,7 +20,7 @@ const PERFORMANCE_MODELS = [
     tag: 'برقی',
     tagColor: 'bg-emerald-500',
     image: '/images/mokka-e-new.png',
-    href: '/fa/models/mokka-e',
+    href: '/fa/models',
     accentColor: '#10b981',
     specs: [
       { label: 'توان موتور', value: '۱۵۶ اسب بخار' },
@@ -38,7 +38,7 @@ const PERFORMANCE_MODELS = [
     tag: 'بنزینی',
     tagColor: 'bg-yellow-400',
     image: '/images/mokka-new.png',
-    href: '/fa/models/mokka',
+    href: '/fa/models',
     accentColor: '#facc15',
     specs: [
       { label: 'توان موتور', value: '۱۳۰ اسب بخار' },
@@ -56,7 +56,7 @@ const PERFORMANCE_MODELS = [
     tag: 'هاچ‌بک',
     tagColor: 'bg-blue-500',
     image: '/images/astra-new.png',
-    href: '/fa/models/astra',
+    href: '/fa/models',
     accentColor: '#3b82f6',
     specs: [
       { label: 'توان موتور', value: '۱۳۰ اسب بخار' },
