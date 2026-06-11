@@ -51,9 +51,18 @@ export default function Hero() {
     goNext()
   }
 
+  // Force muted + autoplay (React doesn't always pass muted to DOM)
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true
+      videoRef.current.play().catch(() => {})
+    }
+  }, [])
+
   // Reset video when returning to slide 0
   useEffect(() => {
     if (current === 0 && videoRef.current) {
+      videoRef.current.muted = true
       videoRef.current.currentTime = 0
       videoRef.current.play().catch(() => {})
     }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -72,6 +72,14 @@ const PERFORMANCE_MODELS = [
 export default function ModelsListingPage() {
   const [activeCategory, setActiveCategory] = useState<ModelCategory>('ALL')
   const [activePerf, setActivePerf] = useState(0)
+  const heroVideoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.muted = true
+      heroVideoRef.current.play().catch(() => {})
+    }
+  }, [])
 
   const filtered =
     activeCategory === 'ALL'
@@ -88,6 +96,7 @@ export default function ModelsListingPage() {
       {/* ── VIDEO HERO BANNER ── */}
       <section className="relative w-full h-screen bg-black overflow-hidden">
         <video
+          ref={heroVideoRef}
           src="/videos/mokka-teaser.mp4"
           autoPlay
           muted
