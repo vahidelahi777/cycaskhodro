@@ -1,195 +1,161 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
-const IMAGE_INTERVAL = 6000
+type Slide =
+  | { type: 'video'; src: string }
+  | { type: 'image'; src: string; alt: string }
 
-const HERO_SLIDES = [
-  { id: 0, type: 'video' as const, src: '/videos/hero-fiat-showcase.mp4', alt: 'سیکاس خودرو' },
-  { id: 1, type: 'image' as const, src: '/images/banner1.jpg',  alt: 'سیکاس خودرو - نمایندگی رسمی اوپل' },
-  { id: 2, type: 'image' as const, src: '/images/banner2.avif', alt: 'اوپل موکا' },
-  { id: 3, type: 'image' as const, src: '/images/banner3.jpg',  alt: 'اوپل آسترا' },
+const SLIDES: Slide[] = [
+  { type: 'video', src: '/videos/hero-fiat-showcase.mp4' },
+  { type: 'image', src: '/images/banner1.jpg',  alt: 'سیکاس خودرو' },
+  { type: 'image', src: '/images/banner2.avif', alt: 'اوپل موکا' },
+  { type: 'image', src: '/images/banner3.jpg',  alt: 'اوپل آسترا' },
 ]
 
-interface VideoSlideProps {
-  src: string
-  active: boolean
-  onTimeUpdate: (ratio: number) => void
-  onEnded: () => void
-}
-
-function VideoSlide({ src, active, onTimeUpdate, onEnded }: VideoSlideProps) {
-  const ref = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    if (active) {
-      el.currentTime = 0
-      el.play().catch(() => {})
-    } else {
-      el.pause()
-    }
-  }, [active])
-
-  return (
-    <video
-      ref={ref}
-      src={src}
-      muted
-      playsInline
-      preload="auto"
-      onTimeUpdate={(e) => {
-        const el = e.currentTarget
-        if (el.duration) onTimeUpdate(el.currentTime / el.duration)
-      }}
-      onEnded={onEnded}
-      className="absolute inset-0 w-full h-full object-cover"
-    />
-  )
-}
+const IMAGE_INTERVAL = 5000
 
 export default function Hero() {
-  const [current, setCurrent]   = useState(0)
-  const [paused, setPaused]     = useState(false)
-  const [progress, setProgress] = useState(0)
-  const startRef = useRef<number>(0)
-  const rafRef   = useRef<number>(0)
-  const total    = HERO_SLIDES.length
-
-  const isVideo = HERO_SLIDES[current].type === 'video'
+  const [current, setCurrent] = useState(0)
+  const [videoEnded, setVideoEnded] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const timerRef = useRef<ReturnType<typeof setTimeout>>()
 
   const goTo = useCallback((index: number) => {
     setCurrent(index)
-    setProgress(0)
-    startRef.current = performance.now()
+    setVideoEnded(false)
+    clearTimeout(timerRef.current)
   }, [])
 
-  const next = useCallback(() => goTo((current + 1) % total), [current, goTo, total])
-  const prev = useCallback(() => goTo((current - 1 + total) % total), [current, goTo, total])
+  const goNext = useCallback(() => {
+    goTo((current + 1) % SLIDES.length)
+  }, [current, goTo])
 
-  // RAF timer — only runs for image slides
+  const goPrev = useCallback(() => {
+    goTo((current - 1 + SLIDES.length) % SLIDES.length)
+  }, [current, goTo])
+
+  // Auto-advance: for images use interval, for video wait for ended event
   useEffect(() => {
-    if (paused || isVideo) {
-      cancelAnimationFrame(rafRef.current)
-      return
+    const slide = SLIDES[current]
+    if (slide.type === 'image') {
+      timerRef.current = setTimeout(goNext, IMAGE_INTERVAL)
     }
+    return () => clearTimeout(timerRef.current)
+  }, [current, goNext])
 
-    startRef.current = performance.now() - progress * IMAGE_INTERVAL
+  const handleVideoEnded = () => {
+    setVideoEnded(true)
+    goNext()
+  }
 
-    const tick = (now: number) => {
-      const p = Math.min((now - startRef.current) / IMAGE_INTERVAL, 1)
-      setProgress(p)
-      if (p < 1) {
-        rafRef.current = requestAnimationFrame(tick)
-      } else {
-        setCurrent((c) => (c + 1) % total)
-        setProgress(0)
-        startRef.current = performance.now()
-        rafRef.current = requestAnimationFrame(tick)
-      }
+  // Reset video when returning to slide 0
+  useEffect(() => {
+    if (current === 0 && videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play().catch(() => {})
     }
+  }, [current])
 
-    rafRef.current = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(rafRef.current)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paused, current, isVideo, total])
+  const slide = SLIDES[current]
 
   return (
-    <section
-      className="relative w-full h-screen min-h-[560px] bg-black overflow-hidden select-none"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      aria-roledescription="carousel"
-      aria-label="بنر اصلی"
-    >
-      {/* ── Slides (all in DOM, opacity-switched) ── */}
-      {HERO_SLIDES.map((slide, i) => (
-        <motion.div
-          key={slide.id}
-          className="absolute inset-0"
-          animate={{ opacity: i === current ? 1 : 0 }}
-          transition={{ duration: 1.1, ease: [0.4, 0, 0.2, 1] }}
-          style={{ zIndex: i === current ? 1 : 0 }}
-        >
-          {slide.type === 'video' ? (
-            <VideoSlide
+    <section className="relative w-full h-screen bg-black overflow-hidden">
+
+      {/* Slides */}
+      <AnimatePresence mode="wait">
+        {slide.type === 'video' ? (
+          <motion.div
+            key="video-slide"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="absolute inset-0"
+          >
+            <video
+              ref={videoRef}
               src={slide.src}
-              active={i === current}
-              onTimeUpdate={setProgress}
-              onEnded={next}
+              autoPlay
+              muted
+              playsInline
+              onEnded={handleVideoEnded}
+              onError={handleVideoEnded}
+              className="w-full h-full object-cover"
             />
-          ) : (
+          </motion.div>
+        ) : (
+          <motion.div
+            key={`image-${current}`}
+            initial={{ scale: 1.04, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.0, ease: 'easeInOut' }}
+            className="absolute inset-0"
+          >
             <Image
               src={slide.src}
               alt={slide.alt}
               fill
-              priority={i === 1}
-              quality={92}
+              priority={current === 1}
+              quality={95}
               className="object-cover"
               sizes="100vw"
             />
-          )}
-        </motion.div>
-      ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* ── Gradient overlay ── */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none z-10" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50 pointer-events-none z-10" />
 
-      {/* ── Prev / Next arrows ── */}
+      {/* Prev / Next arrows */}
       <button
-        onClick={prev}
+        onClick={goPrev}
+        className="absolute right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/30 border border-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-all"
         aria-label="اسلاید قبلی"
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20
-          w-11 h-11 flex items-center justify-center
-          rounded-full border border-white/30 bg-black/30 backdrop-blur-sm
-          text-white/80 hover:bg-black/60 hover:text-white hover:border-white/60
-          transition-all duration-200 active:scale-95"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <polyline points="9 18 15 12 9 6" />
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
         </svg>
       </button>
-
       <button
-        onClick={next}
+        onClick={goNext}
+        className="absolute left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/30 border border-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-all"
         aria-label="اسلاید بعدی"
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20
-          w-11 h-11 flex items-center justify-center
-          rounded-full border border-white/30 bg-black/30 backdrop-blur-sm
-          text-white/80 hover:bg-black/60 hover:text-white hover:border-white/60
-          transition-all duration-200 active:scale-95"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <polyline points="15 18 9 12 15 6" />
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
 
-      {/* ── Dots + progress bar ── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3">
-        <div className="flex gap-2">
-          {HERO_SLIDES.map((s, i) => (
-            <button
-              key={s.id}
-              onClick={() => goTo(i)}
-              aria-label={`رفتن به اسلاید ${i + 1}`}
-              aria-current={i === current ? 'true' : undefined}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === current ? 'bg-white w-8' : 'bg-white/40 w-2 hover:bg-white/70'
-              }`}
-            />
-          ))}
-        </div>
-
-        <div className="w-24 h-px bg-white/20 overflow-hidden rounded-full">
-          <motion.div
-            className="h-full bg-opel-yellow rounded-full"
-            style={{ width: `${progress * 100}%` }}
+      {/* Dots */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === current ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
+            }`}
+            aria-label={`اسلاید ${i + 1}`}
           />
-        </div>
+        ))}
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20"
+      >
+        <svg className="w-5 h-5 text-white/50" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </motion.div>
+
     </section>
   )
 }

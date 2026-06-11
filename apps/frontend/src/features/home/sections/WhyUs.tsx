@@ -1,6 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const features = [
   {
@@ -60,87 +62,137 @@ const features = [
   },
 ]
 
-const stats = [
-  { number: '+۱۵', label: 'سال تجربه' },
-  { number: '+۵۰۰۰', label: 'مشتری راضی' },
-  { number: '+۳۵۰۰', label: 'خودرو تحویل شده' },
-  { number: '۱۵', label: 'عاملیت در ایران' },
+const services = [
+  {
+    title: 'مرکز آموزش سیکاس خودرو',
+    description: 'مرکز آموزش سیکاس خودرو با هدف ارتقای دانش فنی و تخصصی کارشناسان و علاقه‌مندان به صنعت خودرو، دوره‌های آموزشی متنوعی را در زمینه تعمیر و نگهداری خودروهای اوپل برگزار می‌نماید.',
+    tags: ['دوره‌های فنی', 'گواهینامه معتبر', 'مربیان خبره', 'تجهیزات مدرن'],
+    image: '/images/mokka-interior-cockpit.jpeg',
+    imagePosition: 'object-center',
+    href: '/fa/services/training',
+    imageRight: false,
+  },
+  {
+    title: 'تعمیرگاه مرکزی سیکاس خودرو',
+    description: 'تعمیرگاه مرکزی سیکاس خودرو با بهره‌گیری از جدیدترین تجهیزات تشخیصی و کادری مجرب، آماده ارائه خدمات تعمیر و نگهداری تخصصی خودروهای اوپل به شما عزیزان می‌باشد.',
+    tags: ['تشخیص کامپیوتری', 'قطعات اصلی', 'کارشناسان مجاز', 'ضمانت تعمیر'],
+    image: '/images/mokka-e-showroom.jpeg',
+    imagePosition: 'object-center',
+    href: '/fa/services/repair',
+    imageRight: true,
+  },
 ]
 
 export default function WhyUs() {
   return (
-    <section className="section-padding bg-opel-black" dir="rtl">
+    <>
+      {/* ═══════════════════════════════════════
+          ZONE 1 — Features grid
+      ════════════════════════════════════════ */}
+      <section className="section-padding bg-white" dir="rtl" aria-labelledby="whyus-title">
 
-      {/* ── Stats band ── */}
-      <div className="section-container mb-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-x-reverse divide-white/10">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="flex flex-col items-center py-8 px-4 text-center"
-            >
-              <span className="text-4xl md:text-5xl font-black text-opel-yellow leading-none mb-2">
-                {stat.number}
-              </span>
-              <span className="text-sm text-white/50 tracking-wide">{stat.label}</span>
-            </motion.div>
-          ))}
-        </div>
-        <div className="h-px bg-white/10 mt-0" />
-      </div>
+        <div className="section-container">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <div className="inline-flex items-center gap-2 border border-opel-yellow/60 bg-opel-yellow/10 text-opel-gray-700 text-xs font-bold tracking-widest uppercase px-4 py-2 mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-opel-yellow" />
+              چرا سیکاس خودرو؟
+            </div>
+            <h2 id="whyus-title" className="section-title text-opel-black mb-6">
+              پیشگام در<br />
+              <span className="text-opel-yellow">صنعت خودرو</span>
+            </h2>
+            <p className="text-opel-gray-500 text-lg leading-relaxed">
+              با بیش از ۱۵ سال تجربه، پیشگام در واردات و خدمات اوپل در ایران هستیم
+            </p>
+          </motion.div>
 
-      {/* ── Section header ── */}
-      <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <div className="inline-flex items-center gap-2 border border-opel-yellow/40 bg-opel-yellow/10 text-opel-yellow text-xs font-bold tracking-widest uppercase px-4 py-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-opel-yellow" />
-            چرا سیکاس خودرو؟
+          {/* Features grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-opel-gray-100">
+            {features.map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="group relative bg-white p-8 hover:bg-opel-gray-100 transition-colors duration-300"
+              >
+                <div className="w-14 h-14 bg-opel-yellow/10 border border-opel-yellow/30 flex items-center justify-center mb-6 text-opel-gray-700 group-hover:bg-opel-yellow group-hover:text-opel-black transition-all duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="text-opel-black font-bold text-lg mb-3 group-hover:text-opel-yellow transition-colors duration-200">
+                  {feature.title}
+                </h3>
+                <p className="text-opel-gray-500 text-sm leading-relaxed">
+                  {feature.description}
+                </p>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-opel-yellow group-hover:w-full transition-all duration-500" />
+              </motion.div>
+            ))}
           </div>
-          <h2 className="section-title text-white mb-6">
-            پیشگام در<br />
-            <span className="text-opel-yellow">صنعت خودرو</span>
-          </h2>
-          <p className="text-white/60 text-lg leading-relaxed">
-            با بیش از ۱۵ سال تجربه، پیشگام در واردات و خدمات اوپل در ایران هستیم
-          </p>
-        </motion.div>
-
-        {/* ── Features grid ── */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10">
-          {features.map((feature, i) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="group relative bg-opel-black p-8 hover:bg-opel-gray-900 transition-colors duration-300"
-            >
-              <div className="w-14 h-14 bg-opel-yellow/10 border border-opel-yellow/20 flex items-center justify-center mb-6 text-opel-yellow group-hover:bg-opel-yellow group-hover:text-opel-black transition-all duration-300">
-                {feature.icon}
-              </div>
-              <h3 className="text-white font-bold text-lg mb-3 group-hover:text-opel-yellow transition-colors duration-200">
-                {feature.title}
-              </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
-                {feature.description}
-              </p>
-              <div className="absolute bottom-0 right-0 w-0 h-0.5 bg-opel-yellow group-hover:w-full transition-all duration-500" />
-            </motion.div>
-          ))}
         </div>
-      </div>
 
-    </section>
+      </section>
+
+      {/* ═══════════════════════════════════════
+          ZONE 2 — WHITE: Service panels
+      ════════════════════════════════════════ */}
+      <section className="bg-white" dir="rtl">
+        {services.map((service, i) => (
+          <motion.div
+            key={service.title}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            className={`grid grid-cols-1 lg:grid-cols-2 min-h-[420px] ${i < services.length - 1 ? 'border-b border-opel-gray-100' : ''}`}
+          >
+            {/* Image */}
+            <div className={`relative h-64 lg:h-auto ${service.imageRight ? 'lg:order-2' : 'lg:order-1'}`}>
+              <Image
+                src={service.image}
+                alt={service.title}
+                fill
+                className={`object-cover ${service.imagePosition}`}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+
+            {/* Content */}
+            <div className={`flex flex-col justify-center px-8 py-14 lg:px-16 ${service.imageRight ? 'lg:order-1' : 'lg:order-2'}`}>
+              <span className="text-opel-yellow text-xs font-bold tracking-[0.25em] uppercase mb-4">
+                خدمات سیکاس خودرو
+              </span>
+              <h3 className="text-2xl md:text-3xl font-black text-opel-black mb-4 leading-tight">
+                {service.title}
+              </h3>
+              <p className="text-opel-gray-500 leading-relaxed mb-6 text-sm max-w-md">
+                {service.description}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-8">
+                {service.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 text-xs font-medium bg-opel-gray-100 text-opel-gray-700 border border-opel-gray-100 rounded-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <Link href={service.href} className="btn-opel-secondary w-fit">
+                اطلاعات بیشتر
+              </Link>
+            </div>
+          </motion.div>
+        ))}
+      </section>
+    </>
   )
 }

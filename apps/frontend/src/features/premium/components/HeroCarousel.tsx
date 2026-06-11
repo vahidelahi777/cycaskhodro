@@ -8,14 +8,14 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 const HERO_SLIDES = [
   {
     id: 1,
-    image: '/images/astra-2024.webp',
+    image: 'https://cycaskhodro.com/wp-content/uploads/2025/08/اوپل-آسترا-3.webp',
     alt: 'Opel Astra - رانندگی متفاوت',
     title: 'Opel Astra',
     description: 'خودرویی برای هر سفر',
   },
   {
     id: 2,
-    image: '/images/mokka-2024.webp',
+    image: 'https://cycaskhodro.com/wp-content/uploads/2025/08/اوپل-موکا-1.webp',
     alt: 'Opel Mokka - تجربه ماندگار',
     title: 'Opel Mokka',
     description: 'SUV پرقدرت و اقتصادی',

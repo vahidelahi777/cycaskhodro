@@ -9,29 +9,42 @@ export const MOKKA_DATA: OpelVehicle = {
   bodyStyle: 'crossover',
   status: 'available',
   tagline: 'انرژی مقاومت‌ناپذیر',
+
+  /** Opel Mokka "Dares to be Different" teaser video */
+  heroVideo: '/videos/mokka-teaser.mp4',
+
   powertrain: {
-    available: ['petrol'],
+    available: ['petrol', 'hybrid'],
     default: 'petrol',
     specs: {
       petrol: {
         engineCode: '1.2 DI Turbo',
         displacement: '۱۱۹۹ سی‌سی',
-        power: '۱۳۰ اسب بخار',
+        power: '۱۳۶ اسب بخار (۱۰۰ کیلووات)',
         torque: '۲۳۰ نیوتون‌متر',
         transmission: 'اتوماتیک ۸ سرعته DCT',
-        fuelConsumption: '۵.۷ لیتر/۱۰۰کم',
+        fuelConsumption: '۵.۷ لیتر/۱۰۰km',
+      },
+      hybrid: {
+        engineCode: '1.2 DI Turbo MHEV',
+        displacement: '۱۱۹۹ سی‌سی + میلد هیبرید',
+        power: '۱۴۵ اسب بخار (۱۰۷ کیلووات)',
+        torque: '۲۳۰ نیوتون‌متر',
+        transmission: 'اتوماتیک ۶ سرعته eDCT',
+        fuelConsumption: '۴.۹ لیتر/۱۰۰km',
       },
     },
   },
+
   trims: [
     {
       level: 'Edition',
       displayName: 'ادیشن',
       price: 1_250_000_000,
       installment: { downPaymentPercent: 30, monthlyPayment: 28_500_000, months: 36 },
-      heroImage: '/images/mokka-new.png',
+      heroImage: '/images/mokka-silver-front.jpeg',
       features: [
-        'نمایشگر ۱۰.۲۵ اینچ لمسی',
+        'نمایشگر ۱۰ اینچ لمسی',
         'دوربین دنده عقب',
         'Apple CarPlay و Android Auto',
         'سیستم صوتی ۶ بلندگو',
@@ -44,12 +57,12 @@ export const MOKKA_DATA: OpelVehicle = {
       displayName: 'جی‌اس',
       price: 1_480_000_000,
       installment: { downPaymentPercent: 30, monthlyPayment: 33_700_000, months: 36 },
-      heroImage: '/images/mokka-2024.webp',
+      heroImage: '/images/mokka-grey-4panel.jpeg',
       highlightBadge: 'محبوب‌ترین',
       isRecommended: true,
       features: [
         'همه امکانات ادیشن',
-        'سقف دوتن مشکی',
+        'سقف دو‌تن مشکی',
         'صندلی‌های ورزشی چرم',
         'دوربین ۳۶۰ درجه',
         'چراغ‌های Matrix LED',
@@ -61,7 +74,7 @@ export const MOKKA_DATA: OpelVehicle = {
       displayName: 'آلتیمیت',
       price: 1_750_000_000,
       installment: { downPaymentPercent: 30, monthlyPayment: 39_800_000, months: 36 },
-      heroImage: '/images/mokka-hero.webp',
+      heroImage: '/images/mokka-silver-rear.jpeg',
       features: [
         'همه امکانات جی‌اس',
         'صندلی‌های ماساژور',
@@ -72,51 +85,69 @@ export const MOKKA_DATA: OpelVehicle = {
       ],
     },
   ],
+
   colors: [
     {
-      id: 'white',
-      name: 'سفید مرواریدی',
-      nameEn: 'Summit White',
-      hex: '#F2F0EC',
-      image: '/images/mokka-new.png',
+      id: 'arktis-weiss',
+      name: 'سفید قطبی',
+      nameEn: 'Arktis Weiß',
+      hex: '#F2EFEA',
+      image: '/images/mokka-silver-front.jpeg',
       available: true,
     },
     {
-      id: 'black',
-      name: 'مشکی آبنوس',
-      nameEn: 'Ebony Black',
+      id: 'kontrast-grau',
+      name: 'خاکستری کنتراست',
+      nameEn: 'Kontrast Grau',
+      hex: '#5C5D5F',
+      image: '/images/mokka-grey-4panel.jpeg',
+      available: true,
+    },
+    {
+      id: 'karbon-schwarz',
+      name: 'مشکی کربن',
+      nameEn: 'Karbon Schwarz',
       hex: '#1A1A1A',
-      image: '/images/mokka-new.png',
+      image: '/images/mokka-silver-rear.jpeg',
       available: true,
     },
     {
-      id: 'red',
-      name: 'قرمز اوپال',
-      nameEn: 'Magma Red',
-      hex: '#CC2200',
-      image: '/images/mokka-new.png',
+      id: 'kolibri-blau',
+      name: 'آبی کولیبری',
+      nameEn: 'Kolibri Blau',
+      hex: '#1B4B8A',
+      image: '/images/mokka-silver-front.jpeg',
       available: true,
     },
     {
-      id: 'blue',
-      name: 'آبی سارفیر',
-      nameEn: 'Sapphire Blue',
-      hex: '#1B4B8C',
-      image: '/images/mokka-new.png',
+      id: 'tropikal-gruen',
+      name: 'سبز گرمسیری',
+      nameEn: 'Tropikal Grün',
+      hex: '#2D5A3D',
+      image: '/images/mokka-grey-4panel.jpeg',
+      available: true,
+    },
+    {
+      id: 'grafik-grau',
+      name: 'خاکستری گرافیک',
+      nameEn: 'Grafik Grau',
+      hex: '#3A3D42',
+      image: '/images/mokka-silver-rear.jpeg',
       available: true,
     },
   ],
+
   specs: {
     dimensions: {
-      length: 4151,
-      width: 1791,
-      height: 1489,
-      wheelbase: 2558,
+      length: 4150,
+      width: 1787,
+      height: 1535,
+      wheelbase: 2557,
       trunkVolume: 310,
     },
     performance: {
-      topSpeed: 206,
-      acceleration0100: 9.1,
+      topSpeed: 208,
+      acceleration0100: 8.8,
     },
     safety: {
       euroncap: 5,
@@ -126,10 +157,11 @@ export const MOKKA_DATA: OpelVehicle = {
         'هشدار تغییر خط',
         'هشدار نقطه کور',
         'کمک نگهداری خط',
+        'هشدار فاصله جلو',
       ],
     },
     technology: {
-      screenSize: '۱۰.۲۵"',
+      screenSize: '۱۰"',
       appleCarPlay: true,
       androidAuto: true,
       camera360: true,
@@ -137,18 +169,103 @@ export const MOKKA_DATA: OpelVehicle = {
       laneAssist: true,
     },
   },
+
   media: {
-    heroImage: '/images/mokka-hero.webp',
+    heroImage: '/images/mokka-silver-front.jpeg',
+
     gallery: [
-      { url: '/images/mokka-2024.webp', alt: 'اوپل موکا ۲۰۲۵' },
-      { url: '/images/mokka-banner-new.jpg', alt: 'اوپل موکا ۲۰۲۵ نمای جانبی' },
+      { url: '/images/mokka-silver-front.jpeg',   alt: 'اوپل موکا ۲۰۲۵ — نمای جلو نقره‌ای' },
+      { url: '/images/mokka-silver-rear.jpeg',    alt: 'اوپل موکا ۲۰۲۵ — نمای عقب نقره‌ای' },
+      { url: '/images/mokka-grey-4panel.jpeg',    alt: 'اوپل موکا ۲۰۲۵ — چهار زاویه خاکستری' },
+      { url: '/images/mokka-interior-cockpit.jpeg', alt: 'اوپل موکا ۲۰۲۵ — کابین داخلی' },
+      { url: '/images/mokka-interior-wheel.jpeg', alt: 'اوپل موکا ۲۰۲۵ — فرمان و صفحه‌نمایش' },
+      { url: '/images/mokka-2024.webp',           alt: 'اوپل موکا ۲۰۲۵ — نمای جانبی' },
+      { url: '/images/mokka-banner-new.jpg',      alt: 'اوپل موکا ۲۰۲۵ — نمای جانبی بنر' },
+    ],
+
+    exterior: [
+      {
+        url: '/images/mokka-silver-front.jpeg',
+        alt: 'اوپل موکا ۲۰۲۵ — طراحی جلو',
+        callouts: [
+          { label: 'Pixel LED',    top: '30%', right: '25%' },
+          { label: 'گریل تیره',    top: '55%', right: '35%' },
+          { label: 'بدنه عضلانی', top: '55%', left: '30%' },
+        ],
+      },
+      {
+        url: '/images/mokka-silver-rear.jpeg',
+        alt: 'اوپل موکا ۲۰۲۵ — طراحی عقب',
+        callouts: [
+          { label: 'چراغ‌های LED عقب', top: '35%', left: '20%' },
+          { label: 'لترینگ MOKKA',     top: '45%', right: '30%' },
+        ],
+      },
+      {
+        url: '/images/mokka-grey-4panel.jpeg',
+        alt: 'اوپل موکا ۲۰۲۵ — چهار زاویه کامل',
+      },
+    ],
+
+    interior: [
+      {
+        url: '/images/mokka-interior-cockpit.jpeg',
+        alt: 'اوپل موکا ۲۰۲۵ — کابین Pure Panel',
+        caption: 'Pure Panel — دو صفحه‌نمایش یکپارچه ۱۰ اینچ',
+      },
+      {
+        url: '/images/mokka-interior-wheel.jpeg',
+        alt: 'اوپل موکا ۲۰۲۵ — فرمان D-Sport و اینفوتینمنت',
+        caption: 'فرمان D-Sport با کنترل صوتی',
+      },
     ],
   },
+
+  highlights: [
+    {
+      number: '۰۱',
+      titleFa: 'طراحی جسورانه',
+      titleEn: 'Bold Design',
+      descFa: 'هندسه تیز، چراغ‌های Pixel LED، و گریل نقطه‌ای اختصاصی — اوپل موکا از همان نگاه اول خود را معرفی می‌کند.',
+      image: '/images/mokka-silver-front.jpeg',
+    },
+    {
+      number: '۰۲',
+      titleFa: 'Pure Panel کابین',
+      titleEn: 'Pure Panel Cockpit',
+      descFa: 'دو صفحه‌نمایش ۱۰ اینچ به‌صورت یکپارچه در یک قاب خطی — سیستم اینفوتینمنت آینده‌نگر اوپل.',
+      image: '/images/mokka-interior-cockpit.jpeg',
+    },
+    {
+      number: '۰۳',
+      titleFa: 'موتور توربو ۱۳۶',
+      titleEn: '136 HP Turbo',
+      descFa: 'موتور ۱.۲ لیتر Direct Injection Turbo با ۱۳۶ اسب بخار (۱۰۰ کیلووات) و گیربکس اتوماتیک ۸ سرعته DCT. نسخه هیبرید MHEV با ۱۴۵ اسب بخار نیز در دسترس است.',
+      image: '/images/mokka-grey-4panel.jpeg',
+    },
+    {
+      number: '۰۴',
+      titleFa: 'ایمنی ۵ ستاره',
+      titleEn: '5-Star Safety',
+      descFa: 'رتبه ۵ ستاره Euro NCAP، ترمز اضطراری خودکار، رادار نقطه کور، و ۶ کیسه هوا.',
+      image: '/images/mokka-silver-rear.jpeg',
+    },
+    {
+      number: '۰۵',
+      titleFa: 'Apple CarPlay بی‌سیم',
+      titleEn: 'Wireless CarPlay',
+      descFa: 'اتصال بدون کابل به گوشی، ناوبری زنده، و دستیار صوتی — همیشه متصل، همیشه هوشمند.',
+      image: '/images/mokka-interior-wheel.jpeg',
+    },
+  ],
+
   seo: {
-    titleFa: 'اوپل موکا ۲۰۲۵ | قیمت و مشخصات | سیکاس خودرو',
-    descriptionFa: 'خرید اوپل موکا ۲۰۲۵ با بهترین قیمت در ایران. سه تریم با شرایط اقساطی ویژه و گارانتی رسمی.',
-    keywords: ['اوپل موکا', 'قیمت موکا ۲۰۲۵', 'Opel Mokka Iran'],
+    titleFa: 'اوپل موکا ۲۰۲۵ | قیمت، مشخصات و تریم‌ها | سیکاس خودرو',
+    descriptionFa:
+      'خرید اوپل موکا ۲۰۲۵ با بهترین قیمت در ایران. موتور ۱۳۶ اسب بخار ۱.۲ توربو و نسخه هیبرید MHEV ۱۴۵ اسب بخار. Pure Panel، ایمنی ۵ ستاره Euro NCAP. سه تریم با شرایط اقساطی ویژه و گارانتی رسمی سیکاس خودرو.',
+    keywords: ['اوپل موکا', 'قیمت موکا ۲۰۲۵', 'Opel Mokka Iran', 'موکا ۱۳۶', 'موکا هیبرید', 'سیکاس خودرو'],
   },
+
   dealers: [
     {
       id: 'tehran-1',
@@ -184,6 +301,7 @@ export const MOKKA_DATA: OpelVehicle = {
       hours: 'شنبه تا چهارشنبه ۹-۱۸، پنج‌شنبه ۹-۱۴',
     },
   ],
+
   importInfo: {
     originCountry: 'آلمان',
     warrantyYears: 3,

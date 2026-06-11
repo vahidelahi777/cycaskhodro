@@ -29,27 +29,43 @@ export function OptimizedImage({
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
-  const sharedProps = {
-    src,
-    alt,
-    quality,
-    priority,
-    className: `${className} ${isLoading ? 'blur-sm' : 'blur-0'} transition-all duration-300`,
-    onLoad: () => setIsLoading(false),
-    onError: () => setHasError(true),
-  }
+  // Check if it's an external URL or local
+  const isExternal = src.startsWith('http')
 
-  if (hasError) {
-    return (
-      <div className={`${className} bg-neutral-200 flex items-center justify-center text-neutral-500`}>
-        <span className="text-sm">تصویر دستیافتنی نیست</span>
-      </div>
-    )
-  }
+  return (
+    <>
+      {fill ? (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className={`${className} ${isLoading ? 'blur-sm' : 'blur-0'} transition-all duration-300`}
+          onLoadingComplete={() => setIsLoading(false)}
+          onError={() => setHasError(true)}
+          quality={quality}
+          priority={priority}
+          sizes={sizes}
+        />
+      ) : (
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className={`${className} ${isLoading ? 'blur-sm' : 'blur-0'} transition-all duration-300`}
+          onLoadingComplete={() => setIsLoading(false)}
+          onError={() => setHasError(true)}
+          quality={quality}
+          priority={priority}
+        />
+      )}
 
-  return fill ? (
-    <Image {...sharedProps} fill sizes={sizes} />
-  ) : (
-    <Image {...sharedProps} width={width} height={height} />
+      {/* Fallback placeholder if image fails to load */}
+      {hasError && (
+        <div className={`${className} bg-neutral-200 flex items-center justify-center text-neutral-500`}>
+          <span className="text-sm">تصویر دستیافتنی نیست</span>
+        </div>
+      )}
+    </>
   )
 }
