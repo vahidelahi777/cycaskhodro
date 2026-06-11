@@ -109,7 +109,7 @@ export default function Hero() {
               alt={slide.alt}
               fill
               priority={current === 1}
-              quality={95}
+              quality={90}
               className="object-cover"
               sizes="100vw"
             />
