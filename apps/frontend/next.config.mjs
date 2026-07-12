@@ -21,6 +21,15 @@ const nextConfig = {
     minimumCacheTTL: 604800, // 7 days — processed images stay cached
   },
 
+  typescript: {
+    // Type errors caught locally + in CI (tsc --noEmit). Skip re-check during build to avoid OOM on low-RAM servers.
+    ignoreBuildErrors: true,
+  },
+
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
