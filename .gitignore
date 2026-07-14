@@ -126,3 +126,9 @@ backups/
 .cache/
 tmp/
 temp/
+
+# ---------------------------------------------------
+# Internal dev tooling (not for distribution)
+# ---------------------------------------------------
+CLAUDE.md
+.claude/

@@ -35,7 +35,6 @@ export function ContactSection() {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      // POST to Next.js API route
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

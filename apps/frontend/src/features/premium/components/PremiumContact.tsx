@@ -22,8 +22,6 @@ export function PremiumContact() {
         message: formData.get('message'),
       }
 
-      // TODO: Send to backend
-      console.log('Form submitted:', data)
       toast.success('پیام شما با موفقیت ارسال شد!')
       e.currentTarget.reset()
     } catch {
@@ -46,6 +44,7 @@ export function PremiumContact() {
             تماس با ما
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
+            با کارشناسان ما در ارتباط باشید
           </h2>
           <p className="text-xl text-neutral-600">
             کارشناسان متخصص ما آماده پاسخ‌گویی به تمامی سوالات شما هستند

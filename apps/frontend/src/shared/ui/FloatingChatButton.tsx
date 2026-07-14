@@ -4,8 +4,7 @@ import { MessageCircle } from 'lucide-react';
 
 export function FloatingChatButton() {
   const handleChatClick = () => {
-    // می‌تونی به صفحه تماس هدایت کنی یا یک modal باز کنی
-    window.location.href = '/fa/contact'; // یا هر locale دیگه
+    window.location.href = '/fa/contact';
   };
 
   return (
@@ -17,10 +16,8 @@ export function FloatingChatButton() {
       >
         <MessageCircle className="w-6 h-6" />
         
-        {/* نقطه قرمز نوتیفیکیشن */}
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
-        
-        {/* تولتیپ */}
+
         <span className="absolute left-full ml-3 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
           چت آنلاین با ما
         </span>

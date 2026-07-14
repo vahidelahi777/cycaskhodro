@@ -7,19 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
-// =========================
-// TYPES
-// =========================
-
 type NavItem = {
   label: string
   href?: string
   children?: NavItem[]
 }
-
-// =========================
-// NAVIGATION
-// =========================
 
 const navItems: NavItem[] = [
   {
@@ -135,10 +127,6 @@ const navItems: NavItem[] = [
   },
 ]
 
-// =========================
-// COMPONENT
-// =========================
-
 export default function ApplePremiumHeader() {
   const pathname = usePathname()
 
@@ -146,10 +134,6 @@ export default function ApplePremiumHeader() {
   const [openMenu, setOpenMenu] = useState<string | null>(null)
   const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
-
-  // =========================
-  // SCROLL EFFECT
-  // =========================
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 10)
@@ -163,10 +147,6 @@ export default function ApplePremiumHeader() {
     }
   }, [handleScroll])
 
-  // =========================
-  // HELPERS
-  // =========================
-
   const isActive = (href?: string) => {
     if (!href) return false
 
@@ -177,10 +157,6 @@ export default function ApplePremiumHeader() {
     return pathname.startsWith(href)
   }
 
-  // =========================
-  // RENDER
-  // =========================
-
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
@@ -190,10 +166,6 @@ export default function ApplePremiumHeader() {
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:h-20 md:px-6 lg:px-8">
-        {/* ========================= */}
-        {/* LOGO */}
-        {/* ========================= */}
-
         <Link href="/fa" className="flex items-center">
           <Image
             src="/images/logo_site.png"
@@ -204,10 +176,6 @@ export default function ApplePremiumHeader() {
             className="h-10 w-auto object-contain md:h-12"
           />
         </Link>
-
-        {/* ========================= */}
-        {/* DESKTOP MENU */}
-        {/* ========================= */}
 
         <ul className="hidden items-center gap-10 xl:gap-12 lg:flex">
           {navItems.map((item) => {
@@ -221,10 +189,6 @@ export default function ApplePremiumHeader() {
                 onMouseEnter={() => setOpenMenu(item.label)}
                 onMouseLeave={() => setOpenMenu(null)}
               >
-                {/* ========================= */}
-                {/* TOP LEVEL */}
-                {/* ========================= */}
-
                 {item.href ? (
                   <Link
                     href={item.href}
@@ -242,8 +206,6 @@ export default function ApplePremiumHeader() {
                         className="transition-transform duration-300 group-hover:rotate-180"
                       />
                     )}
-
-                    {/* ANIMATED UNDERLINE */}
 
                     <span
                       className={`absolute bottom-0 right-0 h-[2px] rounded-full bg-yellow-400 transition-all duration-300 ${
@@ -264,15 +226,9 @@ export default function ApplePremiumHeader() {
                       />
                     )}
 
-                    {/* ANIMATED UNDERLINE */}
-
                     <span className="absolute bottom-0 right-0 h-[2px] w-0 rounded-full bg-yellow-400 transition-all duration-300 group-hover:w-full" />
                   </button>
                 )}
-
-                {/* ========================= */}
-                {/* DROPDOWN */}
-                {/* ========================= */}
 
                 <AnimatePresence>
                   {openMenu === item.label && hasChildren && (
@@ -309,8 +265,6 @@ export default function ApplePremiumHeader() {
                             key={sub.label}
                             className="mb-1 last:mb-0"
                           >
-                            {/* LEVEL 2 */}
-
                             <Link
                               href={sub.href ?? '#'}
                               className="flex items-center justify-between rounded-2xl px-4 py-3 text-sm text-neutral-700 transition-all duration-300 hover:bg-black/[0.04] hover:text-black"
@@ -321,8 +275,6 @@ export default function ApplePremiumHeader() {
                                 <ChevronDown size={14} />
                               )}
                             </Link>
-
-                            {/* LEVEL 3 */}
 
                             {hasSubChildren && (
                               <div className="mt-1 mr-3 border-r border-neutral-200 pr-2">
@@ -348,13 +300,7 @@ export default function ApplePremiumHeader() {
           })}
         </ul>
 
-        {/* ========================= */}
-        {/* RIGHT SIDE */}
-        {/* ========================= */}
-
         <div className="flex items-center gap-4">
-          {/* OPEL LOGO */}
-
           <Image
             src="/images/logo_opel.png"
             alt="Opel"
@@ -362,8 +308,6 @@ export default function ApplePremiumHeader() {
             height={40}
             className="hidden h-9 w-auto object-contain md:block"
           />
-
-          {/* MOBILE BUTTON */}
 
           <button
             onClick={() => setIsOpen((prev) => !prev)}
@@ -375,10 +319,6 @@ export default function ApplePremiumHeader() {
         </div>
       </nav>
 
-      {/* ========================= */}
-      {/* MOBILE MENU — full-screen overlay */}
-      {/* ========================= */}
-
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -389,7 +329,6 @@ export default function ApplePremiumHeader() {
             className="fixed inset-0 z-[200] bg-white lg:hidden flex flex-col"
             dir="rtl"
           >
-            {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-neutral-100">
               <Image
                 src="/images/logo_site.png"
@@ -407,7 +346,6 @@ export default function ApplePremiumHeader() {
               </button>
             </div>
 
-            {/* Nav items */}
             <nav className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
               {navItems.map((item) => {
                 const hasChildren = item.children && item.children.length > 0
@@ -415,7 +353,6 @@ export default function ApplePremiumHeader() {
 
                 return (
                   <div key={item.label} className="border-b border-neutral-100 last:border-0">
-                    {/* Row */}
                     {!hasChildren && item.href ? (
                       <Link
                         href={item.href}
@@ -437,7 +374,6 @@ export default function ApplePremiumHeader() {
                       </button>
                     )}
 
-                    {/* Sub-items accordion */}
                     <AnimatePresence>
                       {hasChildren && isExpanded && (
                         <motion.div
@@ -468,7 +404,6 @@ export default function ApplePremiumHeader() {
               })}
             </nav>
 
-            {/* Footer CTA */}
             <div className="px-4 py-5 border-t border-neutral-100 bg-neutral-50">
               <Link
                 href="/fa/contact"

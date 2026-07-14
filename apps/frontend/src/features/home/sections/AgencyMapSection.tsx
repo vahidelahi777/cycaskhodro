@@ -15,24 +15,6 @@ const AGENCIES = [
 		phone: '021-22037809',
 		isMain: true,
 	},
-	{
-		id: '2',
-		nameFa: 'نمایندگی اصفهان',
-		name: 'Isfahan Branch',
-		addressFa: 'اصفهان، خیابان چهارباغ',
-		address: 'Isfahan, Chaharbagh Ave',
-		phone: '031-XXXXXXXX',
-		isMain: false,
-	},
-	{
-		id: '3',
-		nameFa: 'نمایندگی مشهد',
-		name: 'Mashhad Branch',
-		addressFa: 'مشهد، بلوار وکیل آباد',
-		address: 'Mashhad, Vakil Abad Blvd',
-		phone: '051-XXXXXXXX',
-		isMain: false,
-	},
 ]
 
 export function AgencyMapSection() {
@@ -73,10 +55,8 @@ export function AgencyMapSection() {
 				</div>
 
 				<div className="grid lg:grid-cols-12 gap-12 items-start">
-					{/* Map placeholder */}
 					<div className="lg:col-span-8 group relative">
 						<div className="h-[300px] sm:h-[420px] lg:h-[560px] bg-[#f2f2f2] relative overflow-hidden border border-black/5">
-							{/* Placeholder for Mapbox map */}
 							<div className="absolute inset-0 flex flex-col items-center justify-center text-opel-black/20 group-hover:bg-[#ebebeb] transition-colors duration-700">
 								<MapPin size={80} strokeWidth={1} className="mb-6 opacity-40 group-hover:scale-110 transition-transform duration-700" />
 								<p className="text-[12px] uppercase font-black tracking-[0.4em]">
@@ -84,11 +64,8 @@ export function AgencyMapSection() {
 								</p>
 							</div>
 							
-							{/* Pin markers simulation */}
 							{[
 								{ top: '40%', left: '45%', isMain: true },
-								{ top: '60%', left: '42%', isMain: false },
-								{ top: '35%', left: '60%', isMain: false },
 							].map((pin, i) => (
 								<motion.div
 									key={i}

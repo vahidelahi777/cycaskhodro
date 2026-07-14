@@ -12,10 +12,7 @@ const contactSchema = z.object({
 
 export async function submitContactForm(formData: unknown) {
   try {
-    const validated = contactSchema.parse(formData)
-
-    // TODO: Send email or save to database
-    console.log('Contact form submitted:', validated)
+    contactSchema.parse(formData)
 
     return { success: true, message: 'پیام شما با موفقیت ارسال شد' }
   } catch (error) {

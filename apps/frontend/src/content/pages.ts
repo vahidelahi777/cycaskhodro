@@ -1,4 +1,3 @@
-// Complete site content from https://cycaskhodro.com/
 export const pagesContent = {
   // Product Detail Pages
   products: {

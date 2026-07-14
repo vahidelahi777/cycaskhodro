@@ -17,7 +17,7 @@ export const HOME_CONTENT = {
     subheadline: 'تجربه رانندگی با کیفیت آلمانی، همراه با گارانتی معتبر و پشتیبانی کامل قطعات در سراسر ایران.',
     primaryCTA: 'مشاوره و استعلام در واتساپ',
     secondaryCTA: 'مشاهده محصولات',
-    image: '/images/hero-opel.webp', // Placeholder path
+    image: '/images/hero-opel.webp',
   },
   trustHighlights: [
     {

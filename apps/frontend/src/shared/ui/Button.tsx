@@ -12,17 +12,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          // Base styles
           'inline-flex items-center justify-center font-semibold uppercase tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-          
-          // Size variants
           {
             'px-6 py-2.5 text-xs': size === 'sm',
             'px-10 py-3.5 text-sm': size === 'md',
             'px-12 py-4 text-base': size === 'lg',
           },
-          
-          // Variant styles
           {
             'bg-neutral-900 text-white hover:bg-neutral-800 focus-visible:ring-neutral-900':
               variant === 'primary',
